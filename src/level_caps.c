@@ -41,31 +41,31 @@ u32 GetCurrentLevelCap(void)
 u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
 {
     static const u32 sExpScalingDown[5] = { 4, 8, 16, 32, 64 };
-    static const u32 sExpScalingUp[5]   = { 16, 8, 4, 2, 1 };
+    static const u32 sExpScalingUp[5] = { 16, 8, 4, 2, 1 };
 
-    u32 levelDifference;
     u32 currentLevelCap = GetCurrentLevelCap();
+    u32 levelDifference = currentLevelCap > level ? currentLevelCap - level : 0;
 
-    if (B_EXP_CAP_TYPE == EXP_CAP_NONE)
-        return expValue;
-
-    if (B_LEVEL_CAP_EXP_UP && level < currentLevelCap)
+    switch (B_EXP_CAP_TYPE)
     {
-        levelDifference = currentLevelCap - level;
-        if (levelDifference > ARRAY_COUNT(sExpScalingDown))
-            return expValue + (expValue / sExpScalingUp[ARRAY_COUNT(sExpScalingDown) - 1]);
-        else
-            return expValue + (expValue / sExpScalingUp[levelDifference]);
+        case EXP_CAP_NONE:
+            return expValue;
+        case EXP_CAP_SOFT:
+            if (level >= currentLevelCap)
+                return expValue / 4;
+            else if (B_LEVEL_CAP_EXP_UP && level < currentLevelCap)
+                return expValue + (expValue / sExpScalingUp[levelDifference < ARRAY_COUNT(sExpScalingDown) ? levelDifference : ARRAY_COUNT(sExpScalingDown) - 1]);
+            else
+                return expValue;
+        case EXP_CAP_HARD:
+            if (level >= currentLevelCap)
+                return 0;
+            else if (B_LEVEL_CAP_EXP_UP && level < currentLevelCap)
+                return expValue + (expValue / sExpScalingUp[levelDifference < ARRAY_COUNT(sExpScalingDown) ? levelDifference : ARRAY_COUNT(sExpScalingDown) - 1]);
+            else
+                return expValue;
+        default:
+            return expValue / 2;
     }
-    else if (B_EXP_CAP_TYPE == EXP_CAP_SOFT && level >= currentLevelCap)
-    {
-        levelDifference = level - currentLevelCap;
-        if (levelDifference > ARRAY_COUNT(sExpScalingDown))
-            return expValue / sExpScalingDown[ARRAY_COUNT(sExpScalingDown) - 1];
-        else
-            return expValue / sExpScalingDown[levelDifference];
-    }
-    else
-        return 0;
-
 }
+
