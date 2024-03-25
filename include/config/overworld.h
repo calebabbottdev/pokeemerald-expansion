@@ -46,10 +46,13 @@
 #define OW_MAGNET_PULL              GEN_LATEST // Prior to Gen9, if a Pokémon with Magnet Pull is leading the party, there is a 50% chance to encounter a Steel-type Pokémon.
 #define OW_STATIC                   GEN_LATEST // Prior to Gen9, if a Pokémon with Static is leading the party, there is a 50% chance to encounter an Electric-type Pokémon.
 
+// HMs
+#define OW_USE_HMS_WITHOUT_KNOWING  TRUE   // If OW_USE_HMS_WITHOUT_KNOWING is enabled, player can use HMs if owned, has badge, and a party member can learn the move
+
 // Overworld flags
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define OW_FLAG_NO_ENCOUNTER        FLAG_NO_ENCOUNTER       // If this flag is set, wild encounters will be disabled.
+#define OW_FLAG_NO_ENCOUNTER        FLAG_NO_ENCOUNTER    // If this flag is set, wild encounters will be disabled.
 #define OW_FLAG_NO_TRAINER_SEE      FLAG_NO_TRAINER_SEE  // If this flag is set, trainers will not battle the player unless they're talked to.
 #define OW_FLAG_NO_COLLISION        FLAG_NO_COLLISION    // If this flag is set, the player will be able to walk over tiles with collision. Mainly intended for debugging purposes.
 

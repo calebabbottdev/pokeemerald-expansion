@@ -469,9 +469,15 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
-    if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+    #if OW_USE_HMS_WITHOUT_KNOWING
+    // Check if player has Badge 5 and Surf, or player has mon with Surf
+    if (((FlagGet(FLAG_BADGE05_GET) && CheckBagHasItem(ITEM_HM03, 1)) || PartyHasMonWithSurf()) && IsPlayerFacingSurfableFishableWater())
         return EventScript_UseSurf;
-
+    #else
+    // Vanilla Surf check
+    if (FlagGet(FLAG_BADGE05_GET) && PartyHasMonWithSurf() && IsPlayerFacingSurfableFishableWater())
+        return EventScript_UseSurf;
+    #endif
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
         if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
