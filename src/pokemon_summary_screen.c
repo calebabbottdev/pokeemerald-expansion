@@ -2317,12 +2317,17 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
 
 static bool8 CanReplaceMove(void)
 {
-    if (sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES
-        || sMonSummaryScreen->newMove == MOVE_NONE
-        || IsMoveHM(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]) != TRUE)
+    #if I_OVERWRITE_HMS
         return TRUE;
     else
-        return FALSE;
+        #else
+        if (sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES
+            || sMonSummaryScreen->newMove == MOVE_NONE
+            || IsMoveHM(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]) != TRUE)
+            return TRUE;
+        else
+            return FALSE;
+    #endif
 }
 
 static void ShowCantForgetHMsWindow(u8 taskId)
