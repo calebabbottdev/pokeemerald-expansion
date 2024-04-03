@@ -39,6 +39,7 @@ extern const u8 EventScript_SprayWoreOff[];
 
 enum {
     WILD_AREA_LAND,
+    WILD_AREA_SAND,
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
@@ -214,6 +215,33 @@ static u8 ChooseWildMonIndex_Land(void)
         wildMonIndex = 10;
     else
         wildMonIndex = 11;
+
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+        swap = TRUE;
+
+    if (swap)
+        wildMonIndex = 11 - wildMonIndex;
+
+    return wildMonIndex;
+}
+
+// SAND_WILD_COUNT
+static u8 ChooseWildMonIndex_Sand(void)
+{
+    u8 wildMonIndex = 0;
+    bool8 swap = FALSE;
+    u8 rand = Random() % ENCOUNTER_CHANCE_SAND_MONS_TOTAL;
+
+    if (rand < ENCOUNTER_CHANCE_SAND_MONS_SLOT_0)
+        wildMonIndex = 0;
+    else if (rand >= ENCOUNTER_CHANCE_SAND_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_SAND_MONS_SLOT_1)
+        wildMonIndex = 1;
+    else if (rand >= ENCOUNTER_CHANCE_SAND_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_SAND_MONS_SLOT_2)
+        wildMonIndex = 2;
+    else if (rand >= ENCOUNTER_CHANCE_SAND_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_SAND_MONS_SLOT_3)
+        wildMonIndex = 3;
+    else
+        wildMonIndex = 4;
 
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
@@ -482,6 +510,22 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 
         wildMonIndex = ChooseWildMonIndex_Land();
         break;
+    case WILD_AREA_SAND:
+        if (OW_MAGNET_PULL < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, SAND_WILD_COUNT))
+            break;
+        if (OW_STATIC < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, SAND_WILD_COUNT))
+            break;
+        if (OW_LIGHTNING_ROD == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD, &wildMonIndex, SAND_WILD_COUNT))
+            break;
+        if (OW_FLASH_FIRE == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_FIRE, ABILITY_FLASH_FIRE, &wildMonIndex, SAND_WILD_COUNT))
+            break;
+        if (OW_HARVEST == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_GRASS, ABILITY_HARVEST, &wildMonIndex, SAND_WILD_COUNT))
+            break;
+        if (OW_STORM_DRAIN == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_WATER, ABILITY_STORM_DRAIN, &wildMonIndex, SAND_WILD_COUNT))
+            break;
+
+        wildMonIndex = ChooseWildMonIndex_Sand();
+        break;
     case WILD_AREA_WATER:
         if (OW_MAGNET_PULL < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, WATER_WILD_COUNT))
             break;
@@ -637,6 +681,10 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
                 return FALSE;
             else if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
                 return FALSE;
+             else if (WildEncounterCheck(gBattlePikeWildMonHeaders[headerId].sandMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+            else if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].sandMonsInfo, WILD_AREA_SAND, WILD_CHECK_KEEN_EYE) != TRUE)
+                return FALSE;
             else if (!TryGenerateBattlePikeWildMon(TRUE))
                 return FALSE;
 
@@ -651,6 +699,10 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
             else if (WildEncounterCheck(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
             else if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
+                return FALSE;
+            else if (WildEncounterCheck(gBattlePyramidWildMonHeaders[headerId].sandMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+            else if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_SAND, WILD_CHECK_KEEN_EYE) != TRUE)
                 return FALSE;
 
             GenerateBattlePyramidWildMon();
@@ -705,6 +757,41 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
 
                 return FALSE;
             }
+        }
+        else if (MetatileBehavior_IsSandWildEncounter(curMetatileBehavior) == TRUE)
+        {
+            if (gWildMonHeaders[headerId].sandMonsInfo == NULL)
+                return FALSE;
+            else if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
+                return FALSE;
+            else if (WildEncounterCheck(gWildMonHeaders[headerId].sandMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+
+            if (DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+            {
+                BattleSetup_StartWildBattle();
+                return TRUE;
+            }
+
+            // try a regular wild sand encounter
+            if (TryGenerateWildMon(gWildMonHeaders[headerId].sandMonsInfo, WILD_AREA_SAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+            {
+                if (TryDoDoubleWildBattle())
+                {
+                    struct Pokemon mon1 = gEnemyParty[0];
+                    TryGenerateWildMon(gWildMonHeaders[headerId].sandMonsInfo, WILD_AREA_SAND, WILD_CHECK_KEEN_EYE);
+                    gEnemyParty[1] = mon1;
+                    BattleSetup_StartDoubleWildBattle();
+                }
+                else
+                {
+                    BattleSetup_StartWildBattle();
+                }
+                return TRUE;
+            }
+
+            return FALSE;
+            
         }
         else if (MetatileBehavior_IsWaterWildEncounter(curMetatileBehavior) == TRUE
                  || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridgeOverWater(curMetatileBehavior) == TRUE))
@@ -891,6 +978,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerId;
     const struct WildPokemonInfo *landMonsInfo;
+    const struct WildPokemonInfo *sandMonsInfo;
     const struct WildPokemonInfo *waterMonsInfo;
 
     *isWaterMon = FALSE;
@@ -898,6 +986,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     if (headerId == HEADER_NONE)
         return SPECIES_NONE;
     landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+    sandMonsInfo = gWildMonHeaders[headerId].sandMonsInfo;
     waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
     // Neither
     if (landMonsInfo == NULL && waterMonsInfo == NULL)
@@ -905,6 +994,9 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     // Land Pokémon
     else if (landMonsInfo != NULL && waterMonsInfo == NULL)
         return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+    // Sand Pokémon
+    else if (sandMonsInfo != NULL && waterMonsInfo == NULL)
+        return sandMonsInfo->wildPokemon[ChooseWildMonIndex_Sand()].species;
     // Water Pokémon
     else if (landMonsInfo == NULL && waterMonsInfo != NULL)
     {
@@ -1047,6 +1139,9 @@ static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16
     case WILD_AREA_LAND:
         numMon = LAND_WILD_COUNT;
         break;
+    case WILD_AREA_SAND:
+        numMon = SAND_WILD_COUNT;
+        break;
     case WILD_AREA_WATER:
         numMon = WATER_WILD_COUNT;
         break;
@@ -1096,6 +1191,35 @@ static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
 {
     if (GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM) == ITEM_CLEANSE_TAG)
         *encRate = *encRate * 2 / 3;
+}
+
+void HeadbuttWildEncounter(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].headbuttMonsInfo;
+
+        if (wildPokemonInfo == NULL)
+        {
+            gSpecialVar_Result = FALSE;
+        }
+        else if (WildEncounterCheck(wildPokemonInfo->encounterRate, TRUE) == TRUE
+         && TryGenerateWildMon(wildPokemonInfo, 2, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+        {
+            BattleSetup_StartWildBattle();
+            gSpecialVar_Result = TRUE;
+        }
+        else
+        {
+            gSpecialVar_Result = FALSE;
+        }
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
 }
 
 bool8 TryDoDoubleWildBattle(void)

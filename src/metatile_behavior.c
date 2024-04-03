@@ -5,6 +5,7 @@
 #define TILE_FLAG_HAS_ENCOUNTERS (1 << 0)
 #define TILE_FLAG_SURFABLE       (1 << 1)
 #define TILE_FLAG_UNUSED         (1 << 2) // Roughly all of the traversable metatiles. Set but never read
+#define TILE_FLAG_HAS_SAND_ENCOUNTERS (1 << 3)
 
 static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
 {
@@ -34,7 +35,7 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_STAIRS_OUTSIDE_ABANDONED_SHIP]   = TILE_FLAG_UNUSED,
     [MB_SHOAL_CAVE_ENTRANCE]             = TILE_FLAG_UNUSED,
     [MB_ICE]                             = TILE_FLAG_UNUSED,
-    [MB_SAND]                            = TILE_FLAG_UNUSED,
+    [MB_SAND]                            = TILE_FLAG_UNUSED | TILE_FLAG_HAS_SAND_ENCOUNTERS,
     [MB_SEAWEED]                         = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_UNUSED_23]                       = TILE_FLAG_UNUSED,
     [MB_ASHGRASS]                        = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
@@ -135,6 +136,14 @@ bool8 MetatileBehavior_IsATile(u8 metatileBehavior)
 bool8 MetatileBehavior_IsEncounterTile(u8 metatileBehavior)
 {
     if ((sTileBitAttributes[metatileBehavior] & TILE_FLAG_HAS_ENCOUNTERS))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSandEncounterTile(u8 metatileBehavior)
+{
+    if ((sTileBitAttributes[metatileBehavior] & TILE_FLAG_HAS_SAND_ENCOUNTERS))
         return TRUE;
     else
         return FALSE;
@@ -243,13 +252,13 @@ bool8 MetatileBehavior_IsEscalator(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 Unref_MetatileBehavior_IsUnused04(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_UNUSED_04)
-        return TRUE;
-    else
-        return FALSE;
-}
+// bool8 Unref_MetatileBehavior_IsUnused04(u8 metatileBehavior)
+// {
+//     if (metatileBehavior == MB_UNUSED_04)
+//         return TRUE;
+//     else
+//         return FALSE;
+// }
 
 bool8 MetatileBehavior_IsLadder(u8 metatileBehavior)
 {
@@ -820,6 +829,15 @@ bool8 MetatileBehavior_IsLandWildEncounter(u8 metatileBehavior)
 {
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == FALSE
      && MetatileBehavior_IsEncounterTile(metatileBehavior) == TRUE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSandWildEncounter(u8 metatileBehavior)
+{
+    if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == FALSE
+     && MetatileBehavior_IsSandEncounterTile(metatileBehavior) == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -1396,6 +1414,14 @@ bool8 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
 bool8 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TRAINER_HILL_TIMER)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsHeadbuttTree(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_HEADBUTT)
         return TRUE;
     else
         return FALSE;

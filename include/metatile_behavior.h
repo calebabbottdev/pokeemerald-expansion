@@ -11,6 +11,7 @@ enum {
 
 bool8 MetatileBehavior_IsATile(u8);
 bool8 MetatileBehavior_IsEncounterTile(u8);
+bool8 MetatileBehavior_IsSandEncounterTile(u8);
 bool8 MetatileBehavior_IsJumpEast(u8);
 bool8 MetatileBehavior_IsJumpWest(u8);
 bool8 MetatileBehavior_IsJumpNorth(u8);
@@ -84,6 +85,7 @@ bool8 MetatileBehavior_IsBridgeOverWater(u8);
 u8 MetatileBehavior_GetBridgeType(u8);
 bool8 MetatileBehavior_IsBridgeOverWaterNoEdge(u8);
 bool8 MetatileBehavior_IsLandWildEncounter(u8);
+bool8 MetatileBehavior_IsSandWildEncounter(u8);
 bool8 MetatileBehavior_IsWaterWildEncounter(u8);
 bool8 MetatileBehavior_IsIndoorEncounter(u8);
 bool8 MetatileBehavior_IsMountain(u8);
@@ -148,5 +150,6 @@ bool8 MetatileBehavior_IsQuestionnaire(u8);
 bool8 MetatileBehavior_IsLongGrass_Duplicate(u8);
 bool8 MetatileBehavior_IsLongGrassSouthEdge(u8);
 bool8 MetatileBehavior_IsTrainerHillTimer(u8);
+bool8 MetatileBehavior_IsHeadbuttTree(u8);
 
 #endif // GUARD_METATILE_BEHAVIOR_H

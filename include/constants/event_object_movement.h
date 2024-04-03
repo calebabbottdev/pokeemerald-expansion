@@ -244,6 +244,7 @@
 #define MOVEMENT_ACTION_FLY_DOWN                        0x9D
 #define MOVEMENT_ACTION_EMOTE_X                         0x9E
 #define MOVEMENT_ACTION_EMOTE_DOUBLE_EXCL_MARK          0x9F
+#define MOVEMENT_ACTION_HEADBUTT_SHAKE                  0xA0
 
 #define MOVEMENT_ACTION_STEP_END 0xFE
 #define MOVEMENT_ACTION_NONE     0xFF

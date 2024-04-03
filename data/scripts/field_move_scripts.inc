@@ -287,3 +287,63 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
+
+@ Interact with a tree a Pokémon can use headbutt on
+EventScript_Headbutt::
+	lockall
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_CantHeadbuttTree
+	@ checkpartymove MOVE_NONE
+	@ goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantHeadbuttTree
+	@ If uncommenting above lines, replace second 0 with VAR_RESULT
+	setfieldeffectargument 0, 0
+	bufferpartymonnick STR_VAR_1, 0
+	buffermovename STR_VAR_2, MOVE_HEADBUTT
+	msgbox Text_WantToHeadbutt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelHeadbutt
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_HEADBUTT
+	waitstate
+	goto EventScript_HeadbuttTree
+	end
+
+EventScript_CantHeadbuttTree::
+	msgbox Text_CantHeadbuttTree, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_CancelHeadbutt::
+	closemessage
+	releaseall
+	end
+
+@ Use headbutt from party menu
+EventScript_UseHeadbutt::
+	lockall
+	dofieldeffect FLDEFF_USE_HEADBUTT
+	waitstate
+
+EventScript_HeadbuttTree:
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
+	waitstate
+	special HeadbuttWildEncounter
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_EndHeadbutt
+	waitstate
+
+EventScript_EndHeadbutt:
+	releaseall
+	end
+
+Text_WantToHeadbutt:
+	.string "It's a moderated sized tree.\n"
+	.string "Would you like to use HEADBUTT?$"
+
+Text_CantHeadbuttTree:
+	.string "It's a large, formidable tree.\n"
+	.string "It looks like it can be headbutted!$"
+
