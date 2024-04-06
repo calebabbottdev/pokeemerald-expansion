@@ -52,6 +52,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Chespin,
         .iconPalIndex = 1,
         FOOTPRINT(Chespin)
+        .isStarter = TRUE,
         .levelUpLearnset = sChespinLevelUpLearnset,
         .teachableLearnset = sChespinTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_QUILLADIN}),
@@ -105,6 +106,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Quilladin,
         .iconPalIndex = 1,
         FOOTPRINT(Quilladin)
+        .isStarter = TRUE,
         .levelUpLearnset = sQuilladinLevelUpLearnset,
         .teachableLearnset = sQuilladinTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CHESNAUGHT}),
@@ -158,6 +160,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Chesnaught,
         .iconPalIndex = 1,
         FOOTPRINT(Chesnaught)
+        .isStarter = TRUE,
         .levelUpLearnset = sChesnaughtLevelUpLearnset,
         .teachableLearnset = sChesnaughtTeachableLearnset,
     },
@@ -212,6 +215,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Fennekin,
         .iconPalIndex = 0,
         FOOTPRINT(Fennekin)
+        .isStarter = TRUE,
         .levelUpLearnset = sFennekinLevelUpLearnset,
         .teachableLearnset = sFennekinTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_BRAIXEN}),
@@ -265,6 +269,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Braixen,
         .iconPalIndex = 0,
         FOOTPRINT(Braixen)
+        .isStarter = TRUE,
         .levelUpLearnset = sBraixenLevelUpLearnset,
         .teachableLearnset = sBraixenTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_DELPHOX}),
@@ -318,6 +323,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Delphox,
         .iconPalIndex = 0,
         FOOTPRINT(Delphox)
+        .isStarter = TRUE,
         .levelUpLearnset = sDelphoxLevelUpLearnset,
         .teachableLearnset = sDelphoxTeachableLearnset,
     },
@@ -372,6 +378,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Froakie,
         .iconPalIndex = 0,
         FOOTPRINT(Froakie)
+        .isStarter = TRUE,
         .levelUpLearnset = sFroakieLevelUpLearnset,
         .teachableLearnset = sFroakieTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_FROGADIER}),
@@ -425,6 +432,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Frogadier,
         .iconPalIndex = 0,
         FOOTPRINT(Frogadier)
+        .isStarter = TRUE,
         .levelUpLearnset = sFrogadierLevelUpLearnset,
         .teachableLearnset = sFrogadierTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GRENINJA}),
@@ -475,6 +483,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Greninja,
         .iconPalIndex = 0,
         FOOTPRINT(Greninja)
+        .isStarter = TRUE,
         .levelUpLearnset = sGreninjaLevelUpLearnset,
         .teachableLearnset = sGreninjaTeachableLearnset,
         .formSpeciesIdTable = sGreninjaFormSpeciesIdTable,
@@ -525,6 +534,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Greninja,
         .iconPalIndex = 0,
         FOOTPRINT(Greninja)
+        .isStarter = TRUE,
         .levelUpLearnset = sGreninjaLevelUpLearnset,
         .teachableLearnset = sGreninjaTeachableLearnset,
         .formSpeciesIdTable = sGreninjaFormSpeciesIdTable,
@@ -580,6 +590,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_GreninjaAsh,
         .iconPalIndex = 0,
         FOOTPRINT(Greninja)
+        .isStarter = TRUE,
         .levelUpLearnset = sGreninjaLevelUpLearnset,
         .teachableLearnset = sGreninjaTeachableLearnset,
         .formSpeciesIdTable = sGreninjaFormSpeciesIdTable,

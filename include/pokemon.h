@@ -425,6 +425,7 @@ struct SpeciesInfo /*0x8C*/
             u32 isMythical:1;
             u32 isUltraBeast:1;
             u32 isTotem:1;
+            u32 isStarter:1;
             u32 isParadoxForm:1;
             u32 isMegaEvolution:1;
             u32 isPrimalReversion:1;

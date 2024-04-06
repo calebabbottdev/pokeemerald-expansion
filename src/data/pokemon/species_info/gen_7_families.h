@@ -52,6 +52,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Rowlet,
         .iconPalIndex = 0,
         FOOTPRINT(Rowlet)
+        .isStarter = TRUE,
         .levelUpLearnset = sRowletLevelUpLearnset,
         .teachableLearnset = sRowletTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_DARTRIX}),
@@ -106,6 +107,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Dartrix,
         .iconPalIndex = 1,
         FOOTPRINT(Dartrix)
+        .isStarter = TRUE,
         .levelUpLearnset = sDartrixLevelUpLearnset,
         .teachableLearnset = sDartrixTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE},
@@ -160,6 +162,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Decidueye,
         .iconPalIndex = 1,
         FOOTPRINT(Decidueye)
+        .isStarter = TRUE,
         .levelUpLearnset = sDecidueyeLevelUpLearnset,
         .teachableLearnset = sDecidueyeTeachableLearnset,
         .formSpeciesIdTable = sDecidueyeFormSpeciesIdTable,
@@ -214,6 +217,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_DecidueyeHisuian,
         .iconPalIndex = 0,
         FOOTPRINT(Decidueye)
+        .isStarter = TRUE,
         .isHisuianForm = TRUE,
         .levelUpLearnset = sDecidueyeHisuianLevelUpLearnset,
         .teachableLearnset = sDecidueyeHisuianTeachableLearnset,
@@ -271,6 +275,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Litten,
         .iconPalIndex = 0,
         FOOTPRINT(Litten)
+        .isStarter = TRUE,
         .levelUpLearnset = sLittenLevelUpLearnset,
         .teachableLearnset = sLittenTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_TORRACAT}),
@@ -324,6 +329,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Torracat,
         .iconPalIndex = 0,
         FOOTPRINT(Torracat)
+        .isStarter = TRUE,
         .levelUpLearnset = sTorracatLevelUpLearnset,
         .teachableLearnset = sTorracatTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_INCINEROAR}),
@@ -377,6 +383,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Incineroar,
         .iconPalIndex = 0,
         FOOTPRINT(Incineroar)
+        .isStarter = TRUE,
         .levelUpLearnset = sIncineroarLevelUpLearnset,
         .teachableLearnset = sIncineroarTeachableLearnset,
     },
@@ -431,6 +438,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Popplio,
         .iconPalIndex = 0,
         FOOTPRINT(Popplio)
+        .isStarter = TRUE,
         .levelUpLearnset = sPopplioLevelUpLearnset,
         .teachableLearnset = sPopplioTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_BRIONNE}),
@@ -484,6 +492,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Brionne,
         .iconPalIndex = 0,
         FOOTPRINT(Brionne)
+        .isStarter = TRUE,
         .levelUpLearnset = sBrionneLevelUpLearnset,
         .teachableLearnset = sBrionneTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_PRIMARINA}),
@@ -537,6 +546,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconSprite = gMonIcon_Primarina,
         .iconPalIndex = 0,
         FOOTPRINT(Primarina)
+        .isStarter = TRUE,
         .levelUpLearnset = sPrimarinaLevelUpLearnset,
         .teachableLearnset = sPrimarinaTeachableLearnset,
     },

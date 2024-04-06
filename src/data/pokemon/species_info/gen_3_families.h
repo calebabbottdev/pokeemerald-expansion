@@ -52,6 +52,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Treecko,
         .iconPalIndex = 1,
         FOOTPRINT(Treecko)
+        .isStarter = TRUE,
         .levelUpLearnset = sTreeckoLevelUpLearnset,
         .teachableLearnset = sTreeckoTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_GROVYLE}),
@@ -105,6 +106,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Grovyle,
         .iconPalIndex = 1,
         FOOTPRINT(Grovyle)
+        .isStarter = TRUE,
         .levelUpLearnset = sGrovyleLevelUpLearnset,
         .teachableLearnset = sGrovyleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SCEPTILE}),
@@ -164,6 +166,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Sceptile,
         .iconPalIndex = 1,
         FOOTPRINT(Sceptile)
+        .isStarter = TRUE,
         .levelUpLearnset = sSceptileLevelUpLearnset,
         .teachableLearnset = sSceptileTeachableLearnset,
         .formSpeciesIdTable = sSceptileFormSpeciesIdTable,
@@ -219,6 +222,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_SceptileMega,
         .iconPalIndex = 1,
         FOOTPRINT(Sceptile)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSceptileLevelUpLearnset,
         .teachableLearnset = sSceptileTeachableLearnset,
@@ -279,6 +283,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Torchic,
         .iconPalIndex = 0,
         FOOTPRINT(Torchic)
+        .isStarter = TRUE,
         .levelUpLearnset = sTorchicLevelUpLearnset,
         .teachableLearnset = sTorchicTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_COMBUSKEN}),
@@ -337,6 +342,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Combusken,
         .iconPalIndex = 0,
         FOOTPRINT(Combusken)
+        .isStarter = TRUE,
         .levelUpLearnset = sCombuskenLevelUpLearnset,
         .teachableLearnset = sCombuskenTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLAZIKEN}),
@@ -400,6 +406,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Blaziken,
         .iconPalIndex = 0,
         FOOTPRINT(Blaziken)
+        .isStarter = TRUE,
         .levelUpLearnset = sBlazikenLevelUpLearnset,
         .teachableLearnset = sBlazikenTeachableLearnset,
         .formSpeciesIdTable = sBlazikenFormSpeciesIdTable,
@@ -455,6 +462,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_BlazikenMega,
         .iconPalIndex = 0,
         FOOTPRINT(Blaziken)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBlazikenLevelUpLearnset,
         .teachableLearnset = sBlazikenTeachableLearnset,
@@ -513,6 +521,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Mudkip,
         .iconPalIndex = 0,
         FOOTPRINT(Mudkip)
+        .isStarter = TRUE,
         .levelUpLearnset = sMudkipLevelUpLearnset,
         .teachableLearnset = sMudkipTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_MARSHTOMP}),
@@ -566,6 +575,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Marshtomp,
         .iconPalIndex = 0,
         FOOTPRINT(Marshtomp)
+        .isStarter = TRUE,
         .levelUpLearnset = sMarshtompLevelUpLearnset,
         .teachableLearnset = sMarshtompTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SWAMPERT}),
@@ -625,6 +635,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_Swampert,
         .iconPalIndex = 0,
         FOOTPRINT(Swampert)
+        .isStarter = TRUE,
         .levelUpLearnset = sSwampertLevelUpLearnset,
         .teachableLearnset = sSwampertTeachableLearnset,
         .formSpeciesIdTable = sSwampertFormSpeciesIdTable,
@@ -680,6 +691,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconSprite = gMonIcon_SwampertMega,
         .iconPalIndex = 0,
         FOOTPRINT(Swampert)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSwampertLevelUpLearnset,
         .teachableLearnset = sSwampertTeachableLearnset,

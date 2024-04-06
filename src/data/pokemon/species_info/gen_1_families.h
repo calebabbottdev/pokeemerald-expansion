@@ -52,6 +52,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Bulbasaur,
         .iconPalIndex = 4,
         FOOTPRINT(Bulbasaur)
+        .isStarter = TRUE,
         .levelUpLearnset = sBulbasaurLevelUpLearnset,
         .teachableLearnset = sBulbasaurTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_IVYSAUR}),
@@ -106,6 +107,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Ivysaur,
         .iconPalIndex = 4,
         FOOTPRINT(Ivysaur)
+        .isStarter = TRUE,
         .levelUpLearnset = sIvysaurLevelUpLearnset,
         .teachableLearnset = sIvysaurTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_VENUSAUR}),
@@ -170,6 +172,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Venusaur,
         .iconPalIndex = 4,
         FOOTPRINT(Venusaur)
+        .isStarter = TRUE,
         .levelUpLearnset = sVenusaurLevelUpLearnset,
         .teachableLearnset = sVenusaurTeachableLearnset,
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
@@ -225,6 +228,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_VenusaurMega,
         .iconPalIndex = 4,
         FOOTPRINT(Venusaur)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sVenusaurLevelUpLearnset,
         .teachableLearnset = sVenusaurTeachableLearnset,
@@ -283,6 +287,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_VenusaurGigantamax,
         .iconPalIndex = 0,
         FOOTPRINT(Venusaur)
+        .isStarter = TRUE,
         .isGigantamax = TRUE,
         .levelUpLearnset = sVenusaurLevelUpLearnset,
         .teachableLearnset = sVenusaurTeachableLearnset,
@@ -341,6 +346,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Charmander,
         .iconPalIndex = 0,
         FOOTPRINT(Charmander)
+        .isStarter = TRUE,
         .levelUpLearnset = sCharmanderLevelUpLearnset,
         .teachableLearnset = sCharmanderTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_CHARMELEON}),
@@ -395,6 +401,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Charmeleon,
         .iconPalIndex = 0,
         FOOTPRINT(Charmeleon)
+        .isStarter = TRUE,
         .levelUpLearnset = sCharmeleonLevelUpLearnset,
         .teachableLearnset = sCharmeleonTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CHARIZARD}),
@@ -454,6 +461,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Charizard,
         .iconPalIndex = 0,
         FOOTPRINT(Charizard)
+        .isStarter = TRUE,
         .levelUpLearnset = sCharizardLevelUpLearnset,
         .teachableLearnset = sCharizardTeachableLearnset,
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
@@ -508,6 +516,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_CharizardMegaX,
         .iconPalIndex = 0,
         FOOTPRINT(Charizard)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sCharizardLevelUpLearnset,
         .teachableLearnset = sCharizardTeachableLearnset,
@@ -563,6 +572,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_CharizardMegaY,
         .iconPalIndex = 0,
         FOOTPRINT(Charizard)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sCharizardLevelUpLearnset,
         .teachableLearnset = sCharizardTeachableLearnset,
@@ -620,6 +630,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_CharizardGigantamax,
         .iconPalIndex = 0,
         FOOTPRINT(Charizard)
+        .isStarter = TRUE,
         .isGigantamax = TRUE,
         .levelUpLearnset = sCharizardLevelUpLearnset,
         .teachableLearnset = sCharizardTeachableLearnset,
@@ -678,6 +689,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Squirtle,
         .iconPalIndex = 0,
         FOOTPRINT(Squirtle)
+        .isStarter = TRUE,
         .levelUpLearnset = sSquirtleLevelUpLearnset,
         .teachableLearnset = sSquirtleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_WARTORTLE}),
@@ -732,6 +744,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Wartortle,
         .iconPalIndex = 2,
         FOOTPRINT(Wartortle)
+        .isStarter = TRUE,
         .levelUpLearnset = sWartortleLevelUpLearnset,
         .teachableLearnset = sWartortleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLASTOISE}),
@@ -792,6 +805,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Blastoise,
         .iconPalIndex = 2,
         FOOTPRINT(Blastoise)
+        .isStarter = TRUE,
         .levelUpLearnset = sBlastoiseLevelUpLearnset,
         .teachableLearnset = sBlastoiseTeachableLearnset,
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
@@ -847,6 +861,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_BlastoiseMega,
         .iconPalIndex = 2,
         FOOTPRINT(Blastoise)
+        .isStarter = TRUE,
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBlastoiseLevelUpLearnset,
         .teachableLearnset = sBlastoiseTeachableLearnset,
@@ -904,6 +919,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_BlastoiseGigantamax,
         .iconPalIndex = 0,
         FOOTPRINT(Blastoise)
+        .isStarter = TRUE,
         .isGigantamax = TRUE,
         .levelUpLearnset = sBlastoiseLevelUpLearnset,
         .teachableLearnset = sBlastoiseTeachableLearnset,

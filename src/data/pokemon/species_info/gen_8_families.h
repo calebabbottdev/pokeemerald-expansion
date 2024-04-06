@@ -52,6 +52,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Grookey,
         .iconPalIndex = 1,
         FOOTPRINT(Grookey)
+        .isStarter = TRUE,
         .levelUpLearnset = sGrookeyLevelUpLearnset,
         .teachableLearnset = sGrookeyTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_THWACKEY}),
@@ -104,6 +105,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Thwackey,
         .iconPalIndex = 1,
         FOOTPRINT(Thwackey)
+        .isStarter = TRUE,
         .levelUpLearnset = sThwackeyLevelUpLearnset,
         .teachableLearnset = sThwackeyTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_RILLABOOM}),
@@ -156,6 +158,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Rillaboom,
         .iconPalIndex = 1,
         FOOTPRINT(Rillaboom)
+        .isStarter = TRUE,
         .levelUpLearnset = sRillaboomLevelUpLearnset,
         .teachableLearnset = sRillaboomTeachableLearnset,
         .formSpeciesIdTable = sRillaboomFormSpeciesIdTable,
@@ -210,6 +213,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_RillaboomGigantamax,
         .iconPalIndex = 1,
         FOOTPRINT(Rillaboom)
+        .isStarter = TRUE,
         .isGigantamax = TRUE,
         .levelUpLearnset = sRillaboomLevelUpLearnset,
         .teachableLearnset = sRillaboomTeachableLearnset,
@@ -268,6 +272,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Scorbunny,
         .iconPalIndex = 0,
         FOOTPRINT(Scorbunny)
+        .isStarter = TRUE,
         .levelUpLearnset = sScorbunnyLevelUpLearnset,
         .teachableLearnset = sScorbunnyTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_RABOOT}),
@@ -320,6 +325,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Raboot,
         .iconPalIndex = 0,
         FOOTPRINT(Raboot)
+        .isStarter = TRUE,
         .levelUpLearnset = sRabootLevelUpLearnset,
         .teachableLearnset = sRabootTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_CINDERACE}),
@@ -373,6 +379,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Cinderace,
         .iconPalIndex = 0,
         FOOTPRINT(Cinderace)
+        .isStarter = TRUE,
         .levelUpLearnset = sCinderaceLevelUpLearnset,
         .teachableLearnset = sCinderaceTeachableLearnset,
         .formSpeciesIdTable = sCinderaceFormSpeciesIdTable,
@@ -428,6 +435,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_CinderaceGigantamax,
         .iconPalIndex = 0,
         FOOTPRINT(Cinderace)
+        .isStarter = TRUE,
         .isGigantamax = TRUE,
         .levelUpLearnset = sCinderaceLevelUpLearnset,
         .teachableLearnset = sCinderaceTeachableLearnset,
@@ -487,6 +495,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Sobble,
         .iconPalIndex = 2,
         FOOTPRINT(Sobble)
+        .isStarter = TRUE,
         .levelUpLearnset = sSobbleLevelUpLearnset,
         .teachableLearnset = sSobbleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_DRIZZILE}),
@@ -539,6 +548,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Drizzile,
         .iconPalIndex = 2,
         FOOTPRINT(Drizzile)
+        .isStarter = TRUE,
         .levelUpLearnset = sDrizzileLevelUpLearnset,
         .teachableLearnset = sDrizzileTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_INTELEON}),
@@ -592,6 +602,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Inteleon,
         .iconPalIndex = 0,
         FOOTPRINT(Inteleon)
+        .isStarter = TRUE,
         .levelUpLearnset = sInteleonLevelUpLearnset,
         .teachableLearnset = sInteleonTeachableLearnset,
         .formSpeciesIdTable = sInteleonFormSpeciesIdTable,
@@ -647,6 +658,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_InteleonGigantamax,
         .iconPalIndex = 0,
         FOOTPRINT(Inteleon)
+        .isStarter = TRUE,
         .isGigantamax = TRUE,
         .levelUpLearnset = sInteleonLevelUpLearnset,
         .teachableLearnset = sInteleonTeachableLearnset,

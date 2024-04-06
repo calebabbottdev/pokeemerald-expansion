@@ -52,6 +52,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Chikorita,
         .iconPalIndex = 1,
         FOOTPRINT(Chikorita)
+        .isStarter = TRUE,
         .levelUpLearnset = sChikoritaLevelUpLearnset,
         .teachableLearnset = sChikoritaTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_BAYLEEF}),
@@ -106,6 +107,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Bayleef,
         .iconPalIndex = 1,
         FOOTPRINT(Bayleef)
+        .isStarter = TRUE,
         .levelUpLearnset = sBayleefLevelUpLearnset,
         .teachableLearnset = sBayleefTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_MEGANIUM}),
@@ -170,6 +172,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Meganium,
         .iconPalIndex = 1,
         FOOTPRINT(Meganium)
+        .isStarter = TRUE,
         .levelUpLearnset = sMeganiumLevelUpLearnset,
         .teachableLearnset = sMeganiumTeachableLearnset,
     },
@@ -224,6 +227,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Cyndaquil,
         .iconPalIndex = 3,
         FOOTPRINT(Cyndaquil)
+        .isStarter = TRUE,
         .levelUpLearnset = sCyndaquilLevelUpLearnset,
         .teachableLearnset = sCyndaquilTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_QUILAVA}),
@@ -278,6 +282,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Quilava,
         .iconPalIndex = 3,
         FOOTPRINT(Quilava)
+        .isStarter = TRUE,
         .levelUpLearnset = sQuilavaLevelUpLearnset,
         .teachableLearnset = sQuilavaTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TYPHLOSION},
@@ -341,6 +346,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Typhlosion,
         .iconPalIndex = 3,
         FOOTPRINT(Typhlosion)
+        .isStarter = TRUE,
         .levelUpLearnset = sTyphlosionLevelUpLearnset,
         .teachableLearnset = sTyphlosionTeachableLearnset,
         .formSpeciesIdTable = sTyphlosionFormSpeciesIdTable,
@@ -395,6 +401,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_TyphlosionHisuian,
         .iconPalIndex = 1,
         FOOTPRINT(Typhlosion)
+        .isStarter = TRUE,
         .isHisuianForm = TRUE,
         .levelUpLearnset = sTyphlosionHisuianLevelUpLearnset,
         .teachableLearnset = sTyphlosionHisuianTeachableLearnset,
@@ -452,6 +459,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Totodile,
         .iconPalIndex = 0,
         FOOTPRINT(Totodile)
+        .isStarter = TRUE,
         .levelUpLearnset = sTotodileLevelUpLearnset,
         .teachableLearnset = sTotodileTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_CROCONAW}),
@@ -507,6 +515,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Croconaw,
         .iconPalIndex = 0,
         FOOTPRINT(Croconaw)
+        .isStarter = TRUE,
         .levelUpLearnset = sCroconawLevelUpLearnset,
         .teachableLearnset = sCroconawTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FERALIGATR}),
@@ -568,6 +577,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconSprite = gMonIcon_Feraligatr,
         .iconPalIndex = 0,
         FOOTPRINT(Feraligatr)
+        .isStarter = TRUE,
         .levelUpLearnset = sFeraligatrLevelUpLearnset,
         .teachableLearnset = sFeraligatrTeachableLearnset,
     },

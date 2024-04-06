@@ -834,7 +834,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u16 checksum;
     u8 i;
     u8 availableIVs[NUM_STATS];
-    u8 selectedIvs[LEGENDARY_PERFECT_IV_COUNT];
+    u8 selectedIvs[MON_PERFECT_IV_COUNT];
     bool32 isShiny;
 
     ZeroBoxMonData(boxMon);
@@ -954,7 +954,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
          && (gSpeciesInfo[species].isLegendary
           || gSpeciesInfo[species].isMythical
           || gSpeciesInfo[species].isUltraBeast
-          || gSpeciesInfo[species].isTotem))
+          || gSpeciesInfo[species].isTotem
+          || gSpeciesInfo[species].isStarter))
         {
             iv = MAX_PER_STAT_IVS;
             // Initialize a list of IV indices.
@@ -963,14 +964,14 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 availableIVs[i] = i;
             }
 
-            // Select the 3 IVs that will be perfected.
-            for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+            // Select the IVs that will be perfected.
+            for (i = 0; i < MON_PERFECT_IV_COUNT; i++)
             {
                 u8 index = Random() % (NUM_STATS - i);
                 selectedIvs[i] = availableIVs[index];
                 RemoveIVIndexFromList(availableIVs, index);
             }
-            for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+            for (i = 0; i < MON_PERFECT_IV_COUNT; i++)
             {
                 switch (selectedIvs[i])
                 {
