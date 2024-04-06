@@ -770,17 +770,17 @@
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_KRABBY"
+                "species": "SPECIES_CRABRAWLER"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_KRABBY"
+                "species": "SPECIES_BUIZEL"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_KRABBY"
+                "species": "SPECIES_SQUIRTLE"
               }
             ]
           },
@@ -1045,6 +1045,31 @@
                 "min_level": 40,
                 "max_level": 45,
                 "species": "SPECIES_DRAGALGE"
+              }
+            ]
+          },
+          "sand_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_FLOATZEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_EXEGGUTOR"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MALAMAR"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CRABRAWLER"
               }
             ]
           }
@@ -3769,6 +3794,31 @@
                 "species": "SPECIES_DRAGALGE"
               }
             ]
+          },
+          "sand_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_BUIZEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_EXEGGCUTE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CRABRAWLER"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_INKAY"
+              }
+            ]
           }
         },
         {
@@ -4046,6 +4096,31 @@
                 "species": "SPECIES_BRUXISH"
               }
             ]
+          },
+          "sand_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_MAREANIE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_SANDYGAST"
+              },
+              {
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_WOOPER_PALDEAN"
+              },
+              {
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_TOEDSCOOL"
+              }
+            ]
           }
         },
         {
@@ -4228,6 +4303,31 @@
                 "min_level": 3,
                 "max_level": 3,
                 "species": "SPECIES_AROMATISSE"
+              }
+            ]
+          },
+          "sand_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_STARYU"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CHEWTLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_TOTODILE"
               }
             ]
           }
