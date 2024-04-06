@@ -190,7 +190,9 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
 	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
+	call RivalsHouse_1F_EventScript_RegionChoice
+    msgbox RivalsHouse_1F_Text_OhIForgot, MSGBOX_DEFAULT
+    closemessage
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
@@ -377,11 +379,7 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "{PLAYER}{KUN}, and that we could be friends.\p"
 	.string "Oh, this is silly, isn't it?\n"
 	.string "I… I've just met you, {PLAYER}{KUN}.\p"
-	.string "Eheheh…\p"
-	.string "Oh, no! I forgot!\p"
-	.string "I was supposed to go help Dad catch\n"
-	.string "some wild POKéMON!\p"
-	.string "{PLAYER}{KUN}, I'll catch you later!$"
+	.string "Eheheh…$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "Hey!\n"
@@ -394,16 +392,73 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "next-door neighbor is a GYM LEADER's\l"
 	.string "kid, so I assumed you'd be a guy.\p"
 	.string "My name's BRENDAN.\n"
-	.string "So, hi, neighbor!\p"
-	.string "Huh? Hey, {PLAYER}, don't you have\n"
-	.string "a POKéMON?\p"
-	.string "Do you want me to go catch you one?\p"
-	.string "Aw, darn, I forgot…\p"
-	.string "I'm supposed to go help my dad catch\n"
-	.string "some wild POKéMON.\p"
-	.string "Some other time, okay?$"
+	.string "So, hi, neighbor!$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "Hi, neighbor!\p"
 	.string "Do you already have your\n"
 	.string "own POKéMON?$"
+
+RivalsHouse_1F_EventScript_RegionChoice::
+	msgbox RivalsHouse_1F_Text_WhichRegion, MSGBOX_DEFAULT
+	dynmultichoice 0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, RivalsHouse_1F_EventScript_RegionChoice_Text_0, RivalsHouse_1F_EventScript_RegionChoice_Text_1, RivalsHouse_1F_EventScript_RegionChoice_Text_2, RivalsHouse_1F_EventScript_RegionChoice_Text_3, RivalsHouse_1F_EventScript_RegionChoice_Text_4, RivalsHouse_1F_EventScript_RegionChoice_Text_5, RivalsHouse_1F_EventScript_RegionChoice_Text_6, RivalsHouse_1F_EventScript_RegionChoice_Text_7, RivalsHouse_1F_EventScript_RegionChoice_Text_8
+	compare VAR_RESULT, REGION_HOENN
+	goto_if_eq RivalsHouse_1F_EventScript_RegionChoice_2
+	bufferregionname STR_VAR_1, VAR_RESULT
+	msgbox RivalsHouse_1F_EventScript_RegionChoice_Text_10, MSGBOX_DEFAULT
+
+RivalsHouse_1F_EventScript_RegionChoice_1:
+	copyvar VAR_REGION_CHOICE, VAR_RESULT
+	return
+
+RivalsHouse_1F_EventScript_RegionChoice_2:
+	msgbox RivalsHouse_1F_EventScript_RegionChoice_Text_9, MSGBOX_DEFAULT
+	goto RivalsHouse_1F_EventScript_RegionChoice_1
+
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_0:
+	.string "KANTO$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_1:
+	.string "JOHTO$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_2:
+	.string "HOENN$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_3:
+	.string "SINNOH$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_4:
+	.string "UNOVA$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_5:
+	.string "KALOS$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_6:
+	.string "ALOLA$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_7:
+	.string "GALAR$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_8:
+	.string "PALDEA$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_9:
+	.string "Ah yes that's right - they're from the\n"
+	.string "other side of HOENN!$"
+
+RivalsHouse_1F_EventScript_RegionChoice_Text_10:
+	.string "Ah yes that's right - they're from the\n"
+	.string "{STR_VAR_1} region!$"
+
+RivalsHouse_1F_Text_WhichRegion::
+	.string "You know, I heard that Dad just\n"
+	.string "received some rare POKéMON…\p"
+	.string "Which region were they from again?$"
+
+RivalsHouse_1F_Text_OhIForgot::
+	.string "Oh, no! I forgot!\p"
+	.string "I was supposed to go help Dad catch\n"
+	.string "some wild POKéMON!\p"
+	.string "{PLAYER}, I'll catch you later!$"
+
