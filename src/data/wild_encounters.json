@@ -11,6 +11,15 @@
           ]
         },
         {
+          "type": "sand_mons",
+          "encounter_rates": [
+            30,
+            30,
+            30,
+            10
+          ]
+        },
+        {
           "type": "water_mons",
           "encounter_rates": [
             60, 30, 5, 4, 1
@@ -32,6 +41,16 @@
             "good_rod": [2, 3, 4],
             "super_rod": [5, 6, 7, 8, 9]
           }
+        },
+        {
+          "type": "headbutt_mons",
+          "encounter_rates": [
+            30,
+            30,
+            30,
+            5,
+            5
+          ]
         }
       ],
       "encounters": [
