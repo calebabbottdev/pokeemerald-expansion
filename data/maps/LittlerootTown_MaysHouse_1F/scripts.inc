@@ -190,7 +190,8 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
 	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	call RivalsHouse_1F_EventScript_RegionChoice
+	call_if_unset FLAG_RECEIVE_NATIONAL_DEX_FROM_START, RivalsHouse_1F_EventScript_RegionHoenn
+	call_if_set FLAG_RECEIVE_NATIONAL_DEX_FROM_START, RivalsHouse_1F_EventScript_RegionChoice
     msgbox RivalsHouse_1F_Text_OhIForgot, MSGBOX_DEFAULT
     closemessage
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
@@ -399,11 +400,16 @@ RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "Do you already have your\n"
 	.string "own POKéMON?$"
 
+RivalsHouse_1F_EventScript_RegionHoenn::
+	msgbox RivalsHouse_1F_Text_WhichRegion, MSGBOX_DEFAULT
+	msgbox RivalsHouse_1F_EventScript_RegionChoice_Text_9, MSGBOX_DEFAULT
+	bufferregionname STR_VAR_1, REGION_HOENN
+	return
+
 RivalsHouse_1F_EventScript_RegionChoice::
 	msgbox RivalsHouse_1F_Text_WhichRegion, MSGBOX_DEFAULT
 	dynmultichoice 0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, RivalsHouse_1F_EventScript_RegionChoice_Text_0, RivalsHouse_1F_EventScript_RegionChoice_Text_1, RivalsHouse_1F_EventScript_RegionChoice_Text_2, RivalsHouse_1F_EventScript_RegionChoice_Text_3, RivalsHouse_1F_EventScript_RegionChoice_Text_4, RivalsHouse_1F_EventScript_RegionChoice_Text_5, RivalsHouse_1F_EventScript_RegionChoice_Text_6, RivalsHouse_1F_EventScript_RegionChoice_Text_7, RivalsHouse_1F_EventScript_RegionChoice_Text_8
-	compare VAR_RESULT, REGION_HOENN
-	goto_if_eq RivalsHouse_1F_EventScript_RegionChoice_2
+	goto_if_eq VAR_RESULT, REGION_HOENN, RivalsHouse_1F_EventScript_RegionChoice_2
 	bufferregionname STR_VAR_1, VAR_RESULT
 	msgbox RivalsHouse_1F_EventScript_RegionChoice_Text_10, MSGBOX_DEFAULT
 
@@ -414,7 +420,6 @@ RivalsHouse_1F_EventScript_RegionChoice_1:
 RivalsHouse_1F_EventScript_RegionChoice_2:
 	msgbox RivalsHouse_1F_EventScript_RegionChoice_Text_9, MSGBOX_DEFAULT
 	goto RivalsHouse_1F_EventScript_RegionChoice_1
-
 
 RivalsHouse_1F_EventScript_RegionChoice_Text_0:
 	.string "KANTO$"

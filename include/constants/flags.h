@@ -51,7 +51,9 @@
 #define FLAG_FORCE_SHINY       0x23
 #define FLAG_FORCE_NO_SHINY    0x24
 
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
+// National Dex/Multi Region mons flag
+#define FLAG_RECEIVE_NATIONAL_DEX_FROM_START    0x25 // If set, National Dex from start
+
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag

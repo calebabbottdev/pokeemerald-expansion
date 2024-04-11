@@ -420,7 +420,10 @@ u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-    return sStarterMon[VarGet(VAR_REGION_CHOICE)][chosenStarterId];
+    if (FlagGet(FLAG_RECEIVE_NATIONAL_DEX_FROM_START))
+        return sStarterMon[VarGet(VAR_REGION_CHOICE)][chosenStarterId];
+    else
+        return sStarterMon[2][chosenStarterId];
 }
 
 static void VblankCB_StarterChoose(void)
