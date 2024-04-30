@@ -4630,6 +4630,13 @@ static bool8 NotUsingHPEVItemOnShedinja(struct Pokemon *mon, u16 item)
     return TRUE;
 }
 
+static bool8 UsingMedicineOnFaintedNuzlockeMon(struct Pokemon *mon, u16 item)
+{
+    if (GetItemEffectType(item) != ITEM_EFFECT_NONE && (GetMonData(mon, MON_DATA_HP) == 0 && FlagGet(FLAG_NUZLOCKE_MODE)))
+        return TRUE;
+    return FALSE;
+}
+
 static bool8 IsItemFlute(u16 item)
 {
     if (item == ITEM_BLUE_FLUTE || item == ITEM_RED_FLUTE || item == ITEM_YELLOW_FLUTE)
@@ -4680,6 +4687,10 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     {
         cannotUse = TRUE;
     }
+    else if (UsingMedicineOnFaintedNuzlockeMon(mon, item) == TRUE)
+    {
+        cannotUse = TRUE;
+    }
     else
     {
         canHeal = IsHPRecoveryItem(item);
@@ -4696,7 +4707,10 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        if (GetMonData(mon, MON_DATA_HP) == 0 && FlagGet(FLAG_NUZLOCKE_MODE))
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        else
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;

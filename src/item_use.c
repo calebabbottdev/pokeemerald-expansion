@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
+#include "battle_setup.h"
 #include "berry.h"
 #include "berry_powder.h"
 #include "bike.h"
@@ -1091,7 +1092,13 @@ static u32 GetBallThrowableState(void)
         return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
     else if (FlagGet(B_FLAG_NO_CATCHING))
         return BALL_THROW_UNABLE_DISABLED_FLAG;
-
+    // Nuzlocke
+    else if (FlagGet(FLAG_NUZLOCKE_MODE) && NuzlockeIsCaptureBlocked)
+        return BALL_THROW_UNABLE_CAPTURE_BLOCKED_ROUTE;
+    else if (FlagGet(FLAG_NUZLOCKE_MODE) && NuzlockeIsSpeciesClauseActive == 2)
+        return BALL_THROW_UNABLE_ALREADY_CAUGHT_THIS_MON;
+    else if (FlagGet(FLAG_NUZLOCKE_MODE) && NuzlockeIsSpeciesClauseActive)
+        return BALL_THROW_UNABLE_ALREADY_CAUGHT_EVOLUTION_LINE;
     return BALL_THROW_ABLE;
 }
 
@@ -1139,6 +1146,24 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_Disabled, Task_CloseBattlePyramidBagMessage);
         break;
+    case BALL_THROW_UNABLE_CAPTURE_BLOCKED_ROUTE:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_NuzlockeCantThrowPokeBallRoute, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gText_NuzlockeCantThrowPokeBallRoute, Task_CloseBattlePyramidBagMessage);
+        break;
+    case BALL_THROW_UNABLE_ALREADY_CAUGHT_THIS_MON:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_NuzlockeCantThrowPokeBallAlreadyCaught, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gText_NuzlockeCantThrowPokeBallAlreadyCaught, Task_CloseBattlePyramidBagMessage);
+        break;
+    case BALL_THROW_UNABLE_ALREADY_CAUGHT_EVOLUTION_LINE:
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_NuzlockeCantThrowPokeBallSpeciesClause, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gText_NuzlockeCantThrowPokeBallSpeciesClause, Task_CloseBattlePyramidBagMessage);
+        break;
     }
 }
 
@@ -1184,6 +1209,8 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
         return TRUE;
     }
 
+    if (hp == 0 && FlagGet(FLAG_NUZLOCKE_MODE)) return TRUE;
+
     // battleUsage checks
     switch (battleUsage)
     {
@@ -1220,6 +1247,18 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
             break;
         case BALL_THROW_UNABLE_DISABLED_FLAG:
             failStr = sText_CantThrowPokeBall_Disabled;
+            cannotUse = TRUE;
+            break;
+        case BALL_THROW_UNABLE_CAPTURE_BLOCKED_ROUTE:
+            failStr = gText_NuzlockeCantThrowPokeBallRoute;
+            cannotUse = TRUE;
+            break;
+        case BALL_THROW_UNABLE_ALREADY_CAUGHT_THIS_MON:
+            failStr = gText_NuzlockeCantThrowPokeBallAlreadyCaught;
+            cannotUse = TRUE;
+            break;
+        case BALL_THROW_UNABLE_ALREADY_CAUGHT_EVOLUTION_LINE:
+            failStr = gText_NuzlockeCantThrowPokeBallSpeciesClause;
             cannotUse = TRUE;
             break;
         }

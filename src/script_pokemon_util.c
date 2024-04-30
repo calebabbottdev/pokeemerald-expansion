@@ -34,10 +34,15 @@ static void HealPlayerBoxes(void);
 void HealPlayerParty(void)
 {
     u32 i;
-    for (i = 0; i < gPlayerPartyCount; i++)
-        HealPokemon(&gPlayerParty[i]);
-    if (OW_PC_HEAL >= GEN_8)
+    for (i = 0; i < gPlayerPartyCount; i++) {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0 && FlagGet(FLAG_NUZLOCKE_MODE))
+            continue; // Skip healing if the Pokémon is dead and Nuzlocke is enabled
+        else
+            HealPokemon(&gPlayerParty[i]);
+    }
+    if (OW_PC_HEAL >= GEN_8 && !FlagGet(FLAG_NUZLOCKE_MODE)) {
         HealPlayerBoxes();
+    }
 }
 
 static void HealPlayerBoxes(void)
@@ -50,7 +55,7 @@ static void HealPlayerBoxes(void)
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             boxMon = &gPokemonStoragePtr->boxes[boxId][boxPosition];
-            if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
+            if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES) || (FlagGet(FLAG_NUZLOCKE_MODE) && (GetBoxMonData(boxMon, MON_DATA_HP) != 0)))
                 HealBoxPokemon(boxMon);
         }
     }

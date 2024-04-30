@@ -1817,7 +1817,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
         if (!species)
             break;
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && !(GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0 && FlagGet(FLAG_NUZLOCKE_MODE)))
         {
             #if OW_USE_HMS_WITHOUT_KNOWING
                 if (CanLearnTeachableMove(species, moveId))

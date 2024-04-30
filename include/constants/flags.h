@@ -54,7 +54,7 @@
 // National Dex/Multi Region mons flag
 #define FLAG_RECEIVE_NATIONAL_DEX_FROM_START    0x25 // If set, National Dex from start
 
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
+#define FLAG_NUZLOCKE_MODE    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "option_menu.h"
 #include "bg.h"
 #include "gpu_regs.h"
@@ -486,6 +487,14 @@ static void BattleStyle_DrawChoices(u8 selection)
 
     styles[0] = 0;
     styles[1] = 0;
+
+    if (FlagGet(FLAG_NUZLOCKE_MODE))
+    {
+        styles[1] = 1;
+        DrawOptionMenuChoice(gText_BattleStyleSet, 104, YPOS_BATTLESTYLE, styles[1]);
+        return;
+    }
+
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_BattleStyleShift, 104, YPOS_BATTLESTYLE, styles[0]);

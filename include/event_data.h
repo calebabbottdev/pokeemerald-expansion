@@ -29,6 +29,11 @@ u8 FlagToggle(u16 id);
 u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
 
+// Nuzlocke
+u8 NuzlockeFlagGet(u16 mapsec);
+u8 NuzlockeFlagSet(u16 mapsec);
+u8 NuzlockeFlagClear(u16 mapsec);
+
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
 extern u16 gSpecialVar_0x8002;

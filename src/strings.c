@@ -257,6 +257,12 @@ const u8 gText_ThePokemonList[] = _("the POKéMON LIST");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
 
+// Nuzlocke
+const u8 gText_NuzlockeCantUseItemInBattle[] = _("Item use in battle\nis prohibited\nin Nuzlocke Mode.");
+const u8 gText_NuzlockeCantThrowPokeBallRoute[] = _("You have already encountered a\nPOKéMON in this area!{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[] = _("You have already caught a POKéMON\nin this evolution line!{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[] = _("You have already caught this POKéMON!{PAUSE_UNTIL_PRESS}");
+
 const u8 *const gBagMenu_ReturnToStrings[] =
 {
     [ITEMMENULOCATION_FIELD]               = gText_TheField,
