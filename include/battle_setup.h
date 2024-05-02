@@ -77,6 +77,6 @@ s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
 s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
 u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId);
 
-u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species); 
+u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species);
 
 #endif // GUARD_BATTLE_SETUP_H
