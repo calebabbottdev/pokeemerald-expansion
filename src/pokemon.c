@@ -6698,7 +6698,33 @@ u16 GetSpeciesPreEvolution(u16 species)
     return SPECIES_NONE;
 }
 
+u16 GetSpeciesNextEvolution(u16 species)
+{
+    u16 i;
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+
+    if (evolutions != NULL)
+    {
+        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+            if (evolutions[i].method)
+                return evolutions[i].targetSpecies;
+        }
+    }
+    return SPECIES_NONE;
+}
+
 const u8 *GetMoveName(u16 moveId)
 {
     return gMovesInfo[moveId].name;
+}
+
+u16 GetSpeciesEarliestStage(u16 species)
+{
+    u16 preEvolution = GetSpeciesPreEvolution(species);
+
+    if (preEvolution == SPECIES_NONE)
+        return species;
+    else
+        return GetSpeciesEarliestStage(preEvolution);
 }

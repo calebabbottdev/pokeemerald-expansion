@@ -518,7 +518,8 @@ void BattleSetup_StartWildBattle(void)
             NuzlockeIsCaptureBlocked = FALSE;
             NuzlockeIsSpeciesClauseActive = FALSE;
         }
-    } else
+    }
+    else
     {
             NuzlockeIsCaptureBlocked = FALSE;
             NuzlockeIsSpeciesClauseActive = FALSE;
@@ -2117,107 +2118,30 @@ u16 CountBattledRematchTeams(u16 trainerId)
     return i;
 }
 
-// u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species)
-// {
-//     u8 i;
-//     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-//         return 2;
-
-//     for (i = 0; i < EVOS_PER_LINE; i++)
-//     {
-//         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionLines[species][i]), FLAG_GET_CAUGHT))
-//             return TRUE;
-//     }
-//     return FALSE;
-// }
-
-// u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species)
-// {
-//     u8 i;
-    
-//     const struct Evolution *evolutions = GetSpeciesEvolutions(species);
-
-//     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-//         return 2;
-
-//     // Covers the case where Pokemon is last in evo line
-//     if (evolutions == NULL)
-//     {
-//         u16 preEvolution = GetSpeciesPreEvolution(species);
-//         do
-//         {
-//             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(preEvolution), FLAG_GET_CAUGHT))
-//                 return TRUE;
-//             else
-//                 preEvolution = GetSpeciesPreEvolution(preEvolution);
-//         }
-//         while (preEvolution != SPECIES_NONE);
-//     }
-
-//     // Cover the case where you have later stage and encounter 1st stage
-//     u16 lastTargetSpecies = species;
-//     while (1) {
-//         for (i = 0; evolutions[i].targetSpecies != SPECIES_NONE; i++)
-//         {
-//             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(evolutions[i].targetSpecies), FLAG_GET_CAUGHT))
-//                 return TRUE;
-//         }
-
-//         evolutions = GetSpeciesEvolutions(lastTargetSpecies);
-//         if (evolutions == NULL) {
-//             break;
-//         }
-
-//         lastTargetSpecies = evolutions[i - 1].targetSpecies;
-//     }
-
-//     u16 preEvolution = GetSpeciesPreEvolution(species);
-//         do
-//         {
-//             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(preEvolution), FLAG_GET_CAUGHT))
-//                 return TRUE;
-//             else
-//                 preEvolution = GetSpeciesPreEvolution(preEvolution);
-//         }
-//         while (preEvolution != SPECIES_NONE);
-
-//     return FALSE;
-// }
-
 u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species)
 {
-    u8 i;
-    u16 lastTargetSpecies = species;
-    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
-
-    // Check if the species itself has been caught
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+    {
         return 2;
-
-    // Check if the species has no evolutions
-    u16 preEvolution = species;
-    while (preEvolution != SPECIES_NONE)
-    {
-        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(preEvolution), FLAG_GET_CAUGHT))
-            return TRUE;
-        preEvolution = GetSpeciesPreEvolution(preEvolution);
     }
-    
-    while (1)
+
+    u16 earliestStageMon = GetSpeciesEarliestStage(species);
+    u16 currentSpecies = earliestStageMon;
+    u16 nextSpecies;
+
+    while ((nextSpecies = GetSpeciesNextEvolution(currentSpecies)) != SPECIES_NONE)
     {
-        for (i = 0; evolutions[i].targetSpecies != SPECIES_NONE; i++)
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(currentSpecies), FLAG_GET_CAUGHT))
         {
-            if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(evolutions[i].targetSpecies), FLAG_GET_CAUGHT))
-                return TRUE;
+            return TRUE;
         }
-
-        // Update evolutions to the next stage
-        evolutions = GetSpeciesEvolutions(lastTargetSpecies);
-        if (evolutions == NULL)
-            break;
-
-        // Update lastTargetSpecies to the targetSpecies of the last evolution
-        lastTargetSpecies = evolutions[i - 1].targetSpecies;
+        currentSpecies = nextSpecies;
     }
+
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(currentSpecies), FLAG_GET_CAUGHT))
+    {
+        return TRUE;
+    }
+
     return FALSE;
 }
