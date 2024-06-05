@@ -2260,7 +2260,36 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 otIdType = OT_ID_PRESET;
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
+
             CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+
+            if (IsMonPastEvolutionLevel(&party[i]))
+            {
+                u16 evolvedSpecies = GetSpeciesNextEvolution(partyData[i].species);
+                u16 nextSpecies = evolvedSpecies;
+
+                // Create the first evolved form
+                CreateMon(&party[i], evolvedSpecies, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+
+                // Loop through subsequent evolutions
+                while ((nextSpecies = GetSpeciesNextEvolution(nextSpecies)) != SPECIES_NONE)
+                {
+                    // Check if the next evolution is past its level
+                    if (IsMonPastEvolutionLevel(&party[i]))
+                    {
+                        evolvedSpecies = nextSpecies;
+                    }
+                    else
+                    {
+                        // Break the loop if the next evolution is not past its level
+                        break;
+                    }
+                }
+
+                // Create the final evolutionary form of the Pokémon
+                CreateMon(&party[i], evolvedSpecies, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            }
+
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[i]);
