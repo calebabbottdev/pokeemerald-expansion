@@ -1908,6 +1908,19 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         u32 monIndices[monsCount];
         DoTrainerPartyPool(trainer, monIndices, monsCount, battleTypeFlags);
 
+        u32 playerScaleLvl = 0;
+        u32 currentLvl = 0;
+
+        for (u32 j = 0; j < PARTY_SIZE; j++)
+        {
+            if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE)
+            {
+                currentLvl = GetMonData(&gPlayerParty[j], MON_DATA_LEVEL);
+                if (currentLvl > playerScaleLvl)
+                    playerScaleLvl = currentLvl;
+            }
+        }
+
         for (i = 0; i < monsCount; i++)
         {
             u32 monIndex = monIndices[i];
@@ -1938,7 +1951,11 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 otIdType = OT_ID_PRESET;
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
-            CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+
+            if (partyData[monIndex].lvl == 0)
+                CreateMon(&party[i], partyData[monIndex].species, playerScaleLvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            else
+                CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
