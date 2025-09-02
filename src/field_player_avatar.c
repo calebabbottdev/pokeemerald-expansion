@@ -853,7 +853,10 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         else
         {
             // speed 2 is fast, same speed as running
-            PlayerWalkFast(direction);
+            if (heldKeys & B_BUTTON)
+			PlayerWalkFaster(direction);
+		else
+			PlayerWalkFast(direction);
         }
         return;
     }
