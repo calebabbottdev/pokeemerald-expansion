@@ -84,9 +84,15 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         ZeroEnemyPartyMons();
-        CreateMon(&gEnemyParty[0], SPECIES_NIDORAN_F, 3, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+        CreateMon(&gEnemyParty[0], SPECIES_POOCHYENA, 5, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
         i = 0;
+
+        // s32 currentHP = 1;
+        // s32 speed = 1;
+
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
+        // SetMonData(&gEnemyParty[0], MON_DATA_HP, &currentHP);
+        // SetMonData(&gEnemyParty[0], MON_DATA_SPEED, &speed);
     }
 }
 
