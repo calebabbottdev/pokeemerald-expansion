@@ -2124,7 +2124,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Zigzagoon @ Nugget
-Level: 7
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_DAPHNE ===
@@ -2528,7 +2528,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Zigzagoon @ Nugget
-Level: 7
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MOLLIE ===
@@ -4799,7 +4799,7 @@ Double Battle: No
 AI: Basic Trainer
 
 Geodude
-Level: 12
+Level: 0
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Tackle
 - Defense Curl
@@ -4807,7 +4807,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Rock Tomb
 
 Geodude
-Level: 12
+Level: 0
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Tackle
 - Defense Curl
@@ -4815,7 +4815,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Rock Tomb
 
 Nosepass @ Oran Berry
-Level: 15
+Level: 2
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Block
 - Harden
@@ -5134,7 +5134,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Ralts
-Level: 9
+Level: 0
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
 === TRAINER_TED ===
@@ -5253,7 +5253,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Shroomish
-Level: 9
+Level: -1
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
 === TRAINER_GEORGIA ===
@@ -5950,7 +5950,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Poochyena
-Level: 5
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BILLY ===
@@ -5963,11 +5963,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Zigzagoon
-Level: 5
+Level: -5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Seedot
-Level: 7
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JOSH ===
@@ -5980,7 +5980,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Geodude
-Level: 10
+Level: -2
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Tackle
 
@@ -5994,11 +5994,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Geodude
-Level: 8
+Level: -2
 IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
 Geodude
-Level: 8
+Level: -2
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_JOEY ===
@@ -6011,7 +6011,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Machop
-Level: 9
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BEN ===
@@ -6216,11 +6216,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Zigzagoon
-Level: 4
+Level: -5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Taillow
-Level: 3
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TIMMY ===
@@ -6330,15 +6330,15 @@ Double Battle: No
 AI: Check Bad Move
 
 Magikarp
-Level: 5
+Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Magikarp
-Level: 6
+Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Magikarp
-Level: 7
+Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CLAUDE ===
@@ -8807,11 +8807,11 @@ Double Battle: Yes
 AI: Check Bad Move
 
 Seedot
-Level: 6
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Lotad
-Level: 6
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MIU_AND_YUKI ===
@@ -9511,7 +9511,7 @@ Double Battle: No
 AI: Basic Trainer
 
 Treecko
-Level: 5
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_ROUTE_110_MUDKIP ===
@@ -9566,7 +9566,7 @@ Double Battle: No
 AI: Check Bad Move / Try To Faint / Force Setup First Turn
 
 Torchic
-Level: 5
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_ROUTE_110_TREECKO ===
@@ -9621,7 +9621,7 @@ Double Battle: No
 AI: Basic Trainer
 
 Mudkip
-Level: 5
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_ROUTE_110_TORCHIC ===
@@ -9676,7 +9676,7 @@ Double Battle: No
 AI: Basic Trainer
 
 Treecko
-Level: 5
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAY_ROUTE_110_MUDKIP ===
@@ -9731,7 +9731,7 @@ Double Battle: No
 AI: Basic Trainer
 
 Torchic
-Level: 5
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAY_ROUTE_110_TREECKO ===
@@ -9786,7 +9786,7 @@ Double Battle: No
 AI: Basic Trainer
 
 Mudkip
-Level: 5
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAY_ROUTE_110_TORCHIC ===
@@ -10561,11 +10561,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Geodude
-Level: 8
+Level: -2
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Geodude
-Level: 8
+Level: -2
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 === TRAINER_BRENDEN ===
@@ -11054,11 +11054,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Zigzagoon
-Level: 4
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Shroomish
-Level: 4
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_HALEY_1 ===
@@ -11071,11 +11071,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Lotad
-Level: 6
+Level: -1
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Shroomish
-Level: 6
+Level: -1
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JANICE ===
@@ -11088,7 +11088,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Marill
-Level: 9
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_VIVI ===
@@ -11258,11 +11258,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Wurmple
-Level: 4
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Wurmple
-Level: 4
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_LYLE ===
@@ -11275,19 +11275,19 @@ Double Battle: No
 AI: Check Bad Move
 
 Wurmple
-Level: 3
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Wurmple
-Level: 3
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Wurmple
-Level: 3
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Wurmple
-Level: 3
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JOSE ===
@@ -11300,11 +11300,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Wurmple
-Level: 8
+Level: -5
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Nincada
-Level: 8
+Level: -4
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_DOUG ===
@@ -11364,11 +11364,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Nincada
-Level: 6
+Level: -1
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Nincada
-Level: 6
+Level: -1
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JAMES_2 ===
@@ -11550,7 +11550,7 @@ Double Battle: No
 AI: Check Bad Move
 
 Geodude
-Level: 8
+Level: -5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_ERIC ===
@@ -12942,11 +12942,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Zigzagoon @ Nugget
-Level: 8
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Poochyena
-Level: 8
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SARAH ===
@@ -12960,11 +12960,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Lotad
-Level: 8
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Zigzagoon @ Nugget
-Level: 8
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_DARIAN ===
@@ -12977,8 +12977,9 @@ Double Battle: No
 AI: Check Bad Move
 
 Magikarp
-Level: 9
+Level: 0
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Surf
 
 === TRAINER_HAILEY ===
 Name: HAILEY
@@ -13860,11 +13861,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Geodude
-Level: 8
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Geodude
-Level: 8
+Level: -2
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JOHNSON ===
@@ -13877,11 +13878,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Shroomish
-Level: 8
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 Lotad
-Level: 8
+Level: -3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MELINA ===

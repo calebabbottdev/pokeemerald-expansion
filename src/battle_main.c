@@ -1946,12 +1946,17 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             {
                 level = MIN_LEVEL;
             }
+            // Temporary condition to reduce levels that haven't been adjusted yet
+            else if (level + 3 < level + partyData[monIndex].lvl)
+            {
+                level = level;
+            }
             else
             {
                 level = level + partyData[monIndex].lvl;
             }
 
-            CreateMon(&party[i], partyData[monIndex].species, GetHighestLevelInPlayerParty() + partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            CreateMon(&party[i], partyData[monIndex].species, level, 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
