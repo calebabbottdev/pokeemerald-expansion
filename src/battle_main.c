@@ -1906,19 +1906,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         u32 monIndices[monsCount];
         DoTrainerPartyPool(trainer, monIndices, monsCount, battleTypeFlags);
 
-        u32 playerScaleLvl = 0;
-        u32 currentLvl = 0;
-
-        for (u32 j = 0; j < PARTY_SIZE; j++)
-        {
-            if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE)
-            {
-                currentLvl = GetMonData(&gPlayerParty[j], MON_DATA_LEVEL);
-                if (currentLvl > playerScaleLvl)
-                    playerScaleLvl = currentLvl;
-            }
-        }
-
         for (i = 0; i < monsCount; i++)
         {
             u32 monIndex = monIndices[i];
@@ -1928,6 +1915,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
             u32 abilityNum = 0;
+            u16 level = GetHighestLevelInPlayerParty();
 
             if (trainer->battleType != TRAINER_BATTLE_TYPE_SINGLES)
                 personalityValue = 0x80;
@@ -1950,10 +1938,20 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
 
-            if (partyData[monIndex].lvl == 0)
-                CreateMon(&party[i], partyData[monIndex].species, playerScaleLvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            if (level + partyData[monIndex].lvl > MAX_LEVEL)
+            {
+                level = MAX_LEVEL;
+            }
+            else if (level + partyData[monIndex].lvl < MIN_LEVEL)
+            {
+                level = MIN_LEVEL;
+            }
             else
-                CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            {
+                level = level + partyData[monIndex].lvl;
+            }
+
+            CreateMon(&party[i], partyData[monIndex].species, GetHighestLevelInPlayerParty() + partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
