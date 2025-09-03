@@ -395,3 +395,90 @@ OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
 	.string "“Where things start off scarce.”$"
 
+Script_CheckStarter::
+    lock
+    faceplayer
+	bufferleadmonspeciesname 0
+    compare VAR_STARTER_MON, 0
+    goto_if_eq CheckTreecko
+    compare VAR_STARTER_MON, 1
+    goto_if_eq CheckTorchic
+    compare VAR_STARTER_MON, 2
+    goto_if_eq CheckMudkip
+    release
+    end
+
+CheckTreecko:
+	bufferspeciesname 1, SPECIES_SQUIRTLE
+	goto_if_set FLAG_KANTO_STARTER_RECEIVED, Script_HasBeenGivenPokemon
+    msgbox Text_GiveKantoStarter, MSGBOX_DEFAULT
+	getpartysize
+	compare VAR_RESULT, 6
+	goto_if_eq Script_PlayerHasFullParty
+	givemon SPECIES_SQUIRTLE, 5
+	playfanfare MUS_OBTAIN_ITEM
+	setflag FLAG_KANTO_STARTER_RECEIVED
+	msgbox Text_PlayerReceivedKantoStarter, MSGBOX_DEFAULT
+	waitfanfare
+	release
+    end
+
+CheckTorchic:
+	bufferspeciesname 1, SPECIES_BULBASAUR
+	goto_if_set FLAG_KANTO_STARTER_RECEIVED, Script_HasBeenGivenPokemon
+    msgbox Text_GiveKantoStarter, MSGBOX_DEFAULT
+	getpartysize
+	compare VAR_RESULT, 6
+	goto_if_eq Script_PlayerHasFullParty
+	givemon SPECIES_BULBASAUR, 5
+	playfanfare MUS_OBTAIN_ITEM
+	setflag FLAG_KANTO_STARTER_RECEIVED
+	msgbox Text_PlayerReceivedKantoStarter, MSGBOX_DEFAULT
+	waitfanfare
+	release
+    end
+
+CheckMudkip:
+	bufferspeciesname 1, SPECIES_CHARMANDER
+	goto_if_set FLAG_KANTO_STARTER_RECEIVED, Script_HasBeenGivenPokemon
+    msgbox Text_GiveKantoStarter, MSGBOX_DEFAULT
+	getpartysize
+	compare VAR_RESULT, 6
+	goto_if_eq Script_PlayerHasFullParty
+	givemon SPECIES_CHARMANDER, 5
+	playfanfare MUS_OBTAIN_ITEM
+	setflag FLAG_KANTO_STARTER_RECEIVED
+	msgbox Text_PlayerReceivedKantoStarter, MSGBOX_DEFAULT
+	waitfanfare
+	release
+    end
+
+Text_GiveKantoStarter:
+    .string "Hi there!\p"
+	.string "Are you a new trainer?\n"
+	.string "Wow, I've never seen a {STR_VAR_1} before!\p"
+	.string "I come from the Kanto region.\n"
+	.string "It was an incredibly long journey\l"
+	.string "to get here.\p"
+	.string "Here, I think this {STR_VAR_2} would\n"
+	.string "compliment your {STR_VAR_1} very nicely.\p"
+	.string "Please take good care of it!$"
+
+Script_HasBeenGivenPokemon::
+	msgbox Text_HowsMyOldPokemon, MSGBOX_DEFAULT
+	release
+	end
+
+Text_PlayerReceivedKantoStarter:
+	.string "{PLAYER} received a {STR_VAR_2}!$"
+
+Text_HowsMyOldPokemon:
+	.string "How's my old {STR_VAR_2} doing?$"
+
+Script_PlayerHasFullParty::
+	msgbox Text_PlayerHasFullParty, MSGBOX_DEFAULT
+	release
+	end
+
+Text_PlayerHasFullParty:
+	.string "Ah, your party is full.$"
