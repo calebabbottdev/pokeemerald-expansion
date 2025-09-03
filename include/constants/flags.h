@@ -45,7 +45,7 @@
 
 #define FLAG_EXP_SHARE       0x20
 #define FLAG_POKE_RIDER      0x21
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
+#define FLAG_KANTO_STARTER_RECEIVED    0x22
 #define FLAG_UNUSED_0x023    0x23 // Unused Flag
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
