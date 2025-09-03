@@ -7099,6 +7099,37 @@ uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier)
     return UQ_4_12(1.5 + 0.05 * dynamaxLevel);
 }
 
+#define DYNAMIC_EVO_MAX_EVOLUTIONS 15
+
+u16 GetPossibleEvolution(u16 species, u8 level, u8 maxStage)
+{
+    int i;  //evo method
+    u8 count = 0;
+    u16 validEvolutions[DYNAMIC_EVO_MAX_EVOLUTIONS];			//Just sets an arbitrary upper limit to the number of evolutions for the array size
+
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+
+        if (evolutions == NULL)
+            return species;
+
+        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+			if ((evolutions[i].method == EVO_LEVEL || evolutions[i].method == EVO_LEVEL_BATTLE_ONLY) && level >= evolutions[i].param)
+			{
+				validEvolutions[count++] = evolutions[i].targetSpecies;
+			}
+			else if (evolutions[i].method == EVO_ITEM || evolutions[i].method == EVO_TRADE) //Maximum 25% chance, weighted against party level/obedience
+			{
+				validEvolutions[count++] = evolutions[i].targetSpecies;
+			}
+        }
+		
+		if (count == 0)
+			return species;
+
+    return validEvolutions[Random() % count];
+}
+
 bool32 IsSpeciesRegionalForm(u32 species)
 {
     return gSpeciesInfo[species].isAlolanForm

@@ -18,6 +18,7 @@
 #include "battle_debug.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "battle_tower.h"
 #include "constants/abilities.h"
 #include "constants/game_stat.h"
 #include "constants/item.h"
@@ -324,12 +325,55 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
+#define WILD_MON_CURVE_BADGE_MODIFIER       TRUE
+
+static u8 GetPartyMonCurvedLevel(void)
+{
+    u8 adjustedLevel, currentLevel, monCount = 0, partyMon, badgeModifier = 0;
+    u16 i, totalLevel = 0;
+
+    #if WILD_MON_CURVE_BADGE_MODIFIER
+    for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
+    {
+        if (FlagGet(i))
+            badgeModifier += 5;
+    }
+    #endif
+
+    adjustedLevel = badgeModifier;
+
+    for (partyMon = 0; partyMon < PARTY_SIZE; partyMon++)
+    {
+        u32 species = GetMonData(&gPlayerParty[partyMon], MON_DATA_SPECIES, NULL);
+
+        if (species != SPECIES_NONE && species != SPECIES_EGG)
+        {
+            currentLevel = GetMonData(&gPlayerParty[partyMon], MON_DATA_LEVEL, NULL);
+            totalLevel += currentLevel;
+            monCount++;
+
+            // if (monCount == 1)
+            //     firstMon = currentLevel;
+            if (adjustedLevel < currentLevel)
+                adjustedLevel = (adjustedLevel + currentLevel) / 2;
+        }
+    }
+
+    if (adjustedLevel < (totalLevel / PARTY_SIZE))
+        adjustedLevel = (totalLevel + badgeModifier) / PARTY_SIZE;
+
+    return adjustedLevel;
+}
+
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area)
 {
     u8 min;
     u8 max;
     u8 range;
     u8 rand;
+
+    u8 curvedLevel;
+    u8 curveAmount = 0;
 
     if (LURE_STEP_COUNT == 0)
     {
@@ -344,7 +388,16 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIn
             min = wildPokemon[wildMonIndex].maxLevel;
             max = wildPokemon[wildMonIndex].minLevel;
         }
+
+        curvedLevel = GetPartyMonCurvedLevel();
+
+        if (max < curvedLevel)
+            curveAmount = (((3 * curvedLevel) + max) / 4) - max;
+
         range = max - min + 1;
+        if ((range < (curveAmount * 4) && (range != 0)))
+            range = curveAmount / 4;
+
         rand = Random() % range;
 
         // check ability for max level mon
@@ -354,13 +407,13 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIn
             if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
             {
                 if (Random() % 2 == 0)
-                    return max;
+                    return max + curveAmount;
 
                 if (rand != 0)
                     rand--;
             }
         }
-        return min + rand;
+        return min + rand + curveAmount;
     }
     else
     {
@@ -477,6 +530,34 @@ u8 PickWildMonNature(void)
     return Random() % NUM_NATURES;
 }
 
+static void TryToEvolveWildMon(u16 *species, u8 level)
+{
+    #if WILD_MON_EVO_BANS
+    u16 originalSpecies = *species;
+    #endif
+
+    u8 stages = 0;
+    u8 chance = Random() % 100;
+    if (chance < 33)				//33% chance to evolve a second time
+        stages = 2;
+    else if (chance < 66)			//66% chance to evolve, 33% chance to stay unevolved
+        stages = 1;
+
+    //Try to evolve
+    for (u8 i = 0; i < stages; i++)
+    {
+        u16 evolved = GetPossibleEvolution(*species, level, 1);
+        if (evolved == *species)
+            break;
+        *species = evolved;
+
+        #if WILD_MON_EVO_BANS
+        if (WildMonEvoCheck(originalSpecies, species))
+            return;
+        #endif
+    }
+}
+
 void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm = TRUE;
@@ -510,6 +591,8 @@ void CreateWildMon(u16 species, u8 level)
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
         return;
     }
+
+    TryToEvolveWildMon(&species, level);
 
     CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
 }
