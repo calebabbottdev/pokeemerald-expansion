@@ -887,5 +887,6 @@ u8 *GetSavedPlayerPartyCount(void);
 void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 u32 IsSpeciesOfType(u32 species, u32 type);
 u16 GetPossibleEvolution(u16 species, u8 level, u8 maxStage);
+u16 GetHighestStageEvolution(u16 species, u8 level);
 
 #endif // GUARD_POKEMON_H

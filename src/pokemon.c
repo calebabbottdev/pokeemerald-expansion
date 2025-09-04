@@ -7099,35 +7099,81 @@ uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier)
     return UQ_4_12(1.5 + 0.05 * dynamaxLevel);
 }
 
-#define DYNAMIC_EVO_MAX_EVOLUTIONS 15
-
 u16 GetPossibleEvolution(u16 species, u8 level, u8 maxStage)
 {
-    int i;  //evo method
-    u8 count = 0;
-    u16 validEvolutions[DYNAMIC_EVO_MAX_EVOLUTIONS];			//Just sets an arbitrary upper limit to the number of evolutions for the array size
-
     const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+    if (evolutions == NULL)
+        return species;
 
-        if (evolutions == NULL)
-            return species;
+    u16 chosenSpecies = species;
+    u8 count = 0;
 
-        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+    for (int i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+    {
+        bool8 valid = FALSE;
+        switch (evolutions[i].method)
         {
-			if ((evolutions[i].method == EVO_LEVEL || evolutions[i].method == EVO_LEVEL_BATTLE_ONLY) && level >= evolutions[i].param)
-			{
-				validEvolutions[count++] = evolutions[i].targetSpecies;
-			}
-			else if (evolutions[i].method == EVO_ITEM || evolutions[i].method == EVO_TRADE) //Maximum 25% chance, weighted against party level/obedience
-			{
-				validEvolutions[count++] = evolutions[i].targetSpecies;
-			}
+        case EVO_LEVEL:
+        case EVO_LEVEL_BATTLE_ONLY:
+            valid = (level >= evolutions[i].param);
+            break;
+        case EVO_ITEM:
+        case EVO_TRADE:
+            valid = TRUE;
+            break;
         }
-		
-		if (count == 0)
-			return species;
 
-    return validEvolutions[Random() % count];
+        if (valid)
+        {
+            if (Random() % (count + 1) == 0)
+                chosenSpecies = evolutions[i].targetSpecies;
+            count++;
+        }
+    }
+
+    return chosenSpecies;
+}
+
+u16 GetHighestStageEvolution(u16 species, u8 level)
+{
+    bool8 evolved = TRUE;
+    u16 current = species;
+
+    // Keep evolving until no more valid stage can be reached
+    while (evolved)
+    {
+        evolved = FALSE;
+        const struct Evolution *evolutions = GetSpeciesEvolutions(current);
+        if (evolutions == NULL)
+            break;
+
+        for (int i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+            bool8 valid = FALSE;
+            switch (evolutions[i].method)
+            {
+            case EVO_LEVEL:
+            case EVO_LEVEL_BATTLE_ONLY:
+                valid = (level >= evolutions[i].param);
+                break;
+
+            // Optional: allow these if you want forced item/trade evolutions to count
+            case EVO_ITEM:
+            case EVO_TRADE:
+                valid = (level >= 38);
+                break;
+            }
+
+            if (valid)
+            {
+                current = evolutions[i].targetSpecies;
+                evolved = TRUE;
+                break; // Restart loop with new species
+            }
+        }
+    }
+
+    return current;
 }
 
 bool32 IsSpeciesRegionalForm(u32 species)

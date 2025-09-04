@@ -530,6 +530,9 @@ u8 PickWildMonNature(void)
     return Random() % NUM_NATURES;
 }
 
+#define EVO_CHANCE_TWO_STAGES 33
+#define EVO_CHANCE_ONE_STAGE 66
+
 static void TryToEvolveWildMon(u16 *species, u8 level)
 {
     #if WILD_MON_EVO_BANS
@@ -538,23 +541,22 @@ static void TryToEvolveWildMon(u16 *species, u8 level)
 
     u8 stages = 0;
     u8 chance = Random() % 100;
-    if (chance < 33)				//33% chance to evolve a second time
+    if (chance < EVO_CHANCE_TWO_STAGES)
         stages = 2;
-    else if (chance < 66)			//66% chance to evolve, 33% chance to stay unevolved
+    else if (chance < EVO_CHANCE_ONE_STAGE)
         stages = 1;
 
-    //Try to evolve
     for (u8 i = 0; i < stages; i++)
     {
         u16 evolved = GetPossibleEvolution(*species, level, 1);
-        if (evolved == *species)
-            break;
-        *species = evolved;
-
         #if WILD_MON_EVO_BANS
         if (WildMonEvoCheck(originalSpecies, species))
             return;
         #endif
+
+        if (evolved == *species)
+            break;
+        *species = evolved;
     }
 }
 

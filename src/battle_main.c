@@ -1879,6 +1879,135 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     }
 }
 
+u16 GetTrainerScalingLevel(const struct Trainer *trainer)
+{
+    u16 total = 0;
+    u8 count = 0;
+    u16 highest = 0;
+
+    for (int i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
+        if (level > 0) // ignore empty slots/eggs
+        {
+            total += level;
+            if (level > highest)
+                highest = level;
+            count++;
+        }
+    }
+
+    if (count == 0)
+        return 1; // safety: no mons in party
+
+    u16 average = total / count;
+    u16 scalingLevel = (highest + average) / 2;
+
+    // ----------------------------
+    // Difficulty bias by class
+    // ----------------------------
+    s8 biasMin = 0;
+    s8 biasMax = 0;
+
+    switch (trainer->trainerClass)
+    {
+        // Easier classes → slightly below your level
+        case TRAINER_CLASS_YOUNGSTER:
+        case TRAINER_CLASS_BUG_CATCHER:
+        case TRAINER_CLASS_LASS:
+        case TRAINER_CLASS_SCHOOL_KID:
+        case TRAINER_CLASS_TUBER_F:
+        case TRAINER_CLASS_TUBER_M:
+        case TRAINER_CLASS_PKMN_BREEDER:
+            biasMin = -5;
+            biasMax = -2;
+            break;
+
+        // Normal trainers → around even
+        case TRAINER_CLASS_TEAM_AQUA:
+        case TRAINER_CLASS_TEAM_MAGMA:
+        case TRAINER_CLASS_HIKER:
+        case TRAINER_CLASS_CAMPER:
+        case TRAINER_CLASS_PICNICKER:
+        case TRAINER_CLASS_FISHERMAN:
+        case TRAINER_CLASS_SAILOR:
+        case TRAINER_CLASS_POKEFAN:
+        case TRAINER_CLASS_BIRD_KEEPER:
+        case TRAINER_CLASS_COLLECTOR:
+        case TRAINER_CLASS_SWIMMER_M:
+        case TRAINER_CLASS_SWIMMER_F:
+        case TRAINER_CLASS_BLACK_BELT:
+        case TRAINER_CLASS_HEX_MANIAC:
+        case TRAINER_CLASS_AROMA_LADY:
+        case TRAINER_CLASS_RUIN_MANIAC:
+        case TRAINER_CLASS_INTERVIEWER:
+        case TRAINER_CLASS_LADY:
+        case TRAINER_CLASS_BEAUTY:
+        case TRAINER_CLASS_RICH_BOY:
+        case TRAINER_CLASS_POKEMANIAC:
+        case TRAINER_CLASS_GUITARIST:
+        case TRAINER_CLASS_KINDLER:
+        case TRAINER_CLASS_BUG_MANIAC:
+        case TRAINER_CLASS_PSYCHIC:
+        case TRAINER_CLASS_GENTLEMAN:
+        case TRAINER_CLASS_SR_AND_JR:
+        case TRAINER_CLASS_TRIATHLETE:
+        case TRAINER_CLASS_NINJA_BOY:
+        case TRAINER_CLASS_BATTLE_GIRL:
+        case TRAINER_CLASS_PARASOL_LADY:
+        case TRAINER_CLASS_TWINS:
+        case TRAINER_CLASS_SIS_AND_BRO:
+        case TRAINER_CLASS_YOUNG_COUPLE:
+            biasMin = -3;
+            biasMax = 0;
+            break;
+
+        // Tougher classes → slightly above
+        case TRAINER_CLASS_AQUA_ADMIN:
+        case TRAINER_CLASS_MAGMA_ADMIN:
+        case TRAINER_CLASS_OLD_COUPLE:
+        case TRAINER_CLASS_WINSTRATE:
+        case TRAINER_CLASS_COOLTRAINER:
+        case TRAINER_CLASS_COOLTRAINER_2:
+        case TRAINER_CLASS_DRAGON_TAMER:
+        case TRAINER_CLASS_PKMN_RANGER:
+        case TRAINER_CLASS_EXPERT:
+            biasMin = +1;
+            biasMax = +3;
+            break;
+
+        // Bosses → solidly above
+        case TRAINER_CLASS_RIVAL:
+        case TRAINER_CLASS_LEADER:
+        case TRAINER_CLASS_MAGMA_LEADER:
+        case TRAINER_CLASS_AQUA_LEADER:
+        case TRAINER_CLASS_ELITE_FOUR:
+        case TRAINER_CLASS_CHAMPION:
+            biasMin = +2;
+            biasMax = +6;
+            break;
+
+        default:
+            biasMin = 0;
+            biasMax = 0;
+            break;
+    }
+
+    // Roll inside the range
+    s8 bias = biasMin;
+    if (biasMax > biasMin)
+        bias += Random() % (biasMax - biasMin + 1);
+
+    // Apply bias, clamp within legal range
+    s32 adjusted = (s32)scalingLevel + bias;
+    if (adjusted < MIN_LEVEL)
+        adjusted = MIN_LEVEL;
+    else if (adjusted > MAX_LEVEL)
+        adjusted = MAX_LEVEL;
+
+    return (u16)adjusted;
+}
+
 u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags)
 {
     u32 personalityValue;
@@ -1904,6 +2033,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         }
 
         u32 monIndices[monsCount];
+
         DoTrainerPartyPool(trainer, monIndices, monsCount, battleTypeFlags);
 
         for (i = 0; i < monsCount; i++)
@@ -1915,7 +2045,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
             u32 abilityNum = 0;
-            u16 level = GetHighestLevelInPlayerParty();
 
             if (trainer->battleType != TRAINER_BATTLE_TYPE_SINGLES)
                 personalityValue = 0x80;
@@ -1938,25 +2067,10 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
 
-            if (level + partyData[monIndex].lvl > MAX_LEVEL)
-            {
-                level = MAX_LEVEL;
-            }
-            else if (level + partyData[monIndex].lvl < MIN_LEVEL)
-            {
-                level = MIN_LEVEL;
-            }
-            // Temporary condition to reduce levels that haven't been adjusted yet
-            else if (level + 3 < level + partyData[monIndex].lvl)
-            {
-                level = level;
-            }
-            else
-            {
-                level = level + partyData[monIndex].lvl;
-            }
+            u16 scalingLevel = GetTrainerScalingLevel(trainer);
+            u16 species = GetHighestStageEvolution(partyData[monIndex].species, scalingLevel);
 
-            CreateMon(&party[i], partyData[monIndex].species, level, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            CreateMon(&party[i], species, scalingLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
