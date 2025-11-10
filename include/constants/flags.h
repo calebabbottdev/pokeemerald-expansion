@@ -516,10 +516,10 @@
 #define FLAG_DEFEATED_HO_OH                  0x1DC
 #define FLAG_DEFEATED_LUGIA                  0x1DD
 
-#define FLAG_UNUSED_0x1DE                    0x1DE // Unused Flag
-#define FLAG_UNUSED_0x1DF                    0x1DF // Unused Flag
-#define FLAG_UNUSED_0x1E0                    0x1E0 // Unused Flag
-#define FLAG_UNUSED_0x1E1                    0x1E1 // Unused Flag
+#define FLAG_DEFEATED_ROUTE_125_LAPRAS       0x1DE
+#define FLAG_DEFEATED_ZAPDOS_NEW_MAUVILLE    0x1DF
+#define FLAG_DEFEATED_ARTICUNO_SHOAL_CAVE    0x1E0
+#define FLAG_DEFEATED_MOLTRES_FIERY_PATH     0x1E1
 #define FLAG_UNUSED_0x1E2                    0x1E2 // Unused Flag
 #define FLAG_UNUSED_0x1E3                    0x1E3 // Unused Flag
 

@@ -81,3 +81,27 @@ Route125_EventScript_Auron::
 	msgbox Route125_Text_AuronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route125_EventScript_Lapras::
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_LAPRAS, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	setwildbattle SPECIES_LAPRAS, 30
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route125_EventScript_DefeatedLapras
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route125_EventScript_DefeatedLapras
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route125_EventScript_DefeatedLapras
+	setflag FLAG_DEFEATED_ROUTE_125_LAPRAS
+	release
+	end
+
+Route125_EventScript_DefeatedLapras::
+	setflag FLAG_DEFEATED_ROUTE_125_LAPRAS
+	goto Common_EventScript_RemoveStaticPokemon
+	end
+
