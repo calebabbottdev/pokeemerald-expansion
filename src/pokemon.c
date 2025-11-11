@@ -7134,12 +7134,36 @@ u16 GetPossibleEvolution(u16 species, u8 level, u8 maxStage)
     return chosenSpecies;
 }
 
+static bool8 AreEvolutionConditionsMet(const struct Evolution *evolution)
+{
+    // Some evolutions might not have params/conditions
+    if (evolution->params == NULL)
+        return FALSE;
+
+    for (int j = 0; evolution->params[j].arg1 != CONDITIONS_END; j++)
+    {
+        switch (evolution->params[j].arg1)
+        {
+        case IF_IN_MAPSEC:
+            if (gMapHeader.regionMapSectionId == evolution->params[j].arg1)
+                return TRUE;
+            break;
+
+        // Add more cases as needed:
+        // case IF_TIME_OF_DAY:
+        // case IF_HOLD_ITEM:
+        // etc.
+        }
+    }
+
+    return FALSE;
+}
+
 u16 GetHighestStageEvolution(u16 species, u8 level)
 {
     bool8 evolved = TRUE;
     u16 current = species;
 
-    // Keep evolving until no more valid stage can be reached
     while (evolved)
     {
         evolved = FALSE;
@@ -7157,18 +7181,18 @@ u16 GetHighestStageEvolution(u16 species, u8 level)
                 valid = (level >= evolutions[i].param);
                 break;
 
-            // Optional: allow these if you want forced item/trade evolutions to count
             case EVO_ITEM:
             case EVO_TRADE:
                 valid = (level >= 38);
                 break;
             }
 
-            if (valid)
+            // 🔹 Now include the condition check:
+            if (valid || AreEvolutionConditionsMet(&evolutions[i]))
             {
                 current = evolutions[i].targetSpecies;
                 evolved = TRUE;
-                break; // Restart loop with new species
+                break;
             }
         }
     }

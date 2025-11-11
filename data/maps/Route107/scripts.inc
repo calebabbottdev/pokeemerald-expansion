@@ -52,3 +52,4 @@ Route107_EventScript_Camron::
 	msgbox Route107_Text_CamronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+	

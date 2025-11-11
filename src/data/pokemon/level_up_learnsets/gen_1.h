@@ -1142,12 +1142,12 @@ static const struct LevelUpMove sPolitoedLevelUpLearnset[] = {
 
 #if P_FAMILY_ABRA
 static const struct LevelUpMove sAbraLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_TELEPORT),
+    LEVEL_UP_MOVE( 1, MOVE_PSYWAVE),
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sKadabraLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_TELEPORT),
+    LEVEL_UP_MOVE( 1, MOVE_PSYWAVE),
     LEVEL_UP_MOVE( 1, MOVE_KINESIS),
     LEVEL_UP_MOVE(16, MOVE_CONFUSION),
     LEVEL_UP_MOVE(20, MOVE_DISABLE),
@@ -1159,7 +1159,7 @@ static const struct LevelUpMove sKadabraLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sAlakazamLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_TELEPORT),
+    LEVEL_UP_MOVE( 1, MOVE_PSYWAVE),
     LEVEL_UP_MOVE( 1, MOVE_KINESIS),
     LEVEL_UP_MOVE(16, MOVE_CONFUSION),
     LEVEL_UP_MOVE(20, MOVE_DISABLE),
