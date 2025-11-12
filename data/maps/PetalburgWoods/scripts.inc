@@ -248,16 +248,22 @@ PetalburgWoods_EventScript_Boy2::
 PetalburgWoods_EventScript_Girl::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_ExplainMiracleSeed
-	msgbox PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT
-	giveitem ITEM_MIRACLE_SEED
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_MIRACLE_SEED
+	bufferspeciesname 1, SPECIES_CHIKORITA
+	goto_if_set FLAG_RECEIVED_CHIKORITA, PetalburgWoods_EventScript_ExplainChikorita
+	msgbox PetalburgWoods_Text_LookAfterThisMon, MSGBOX_DEFAULT
+	getpartysize
+	compare VAR_RESULT, 6
+	goto_if_eq PetalburgWoods_Script_PlayerHasFullParty
+	givemon SPECIES_CHIKORITA, 10, ITEM_MIRACLE_SEED
+	playfanfare MUS_OBTAIN_ITEM
+	setflag FLAG_RECEIVED_CHIKORITA
+	msgbox Text_PlayerReceivedChikorita, MSGBOX_DEFAULT
+	waitfanfare
 	release
 	end
 
-PetalburgWoods_EventScript_ExplainMiracleSeed::
-	msgbox PetalburgWoods_Text_MiracleSeedExplanation, MSGBOX_DEFAULT
+PetalburgWoods_EventScript_ExplainChikorita::
+	msgbox PetalburgWoods_Text_ChikoritaExplanation, MSGBOX_DEFAULT
 	release
 	end
 
@@ -439,19 +445,19 @@ PetalburgWoods_Text_HiddenItemsExplanation:
 	.string "That's why I always check where I'm\n"
 	.string "walking.$"
 
-PetalburgWoods_Text_TryUsingThisItem:
+PetalburgWoods_Text_LookAfterThisMon:
 	.string "Oh, neat!\n"
-	.string "That's the BADGE from RUSTBORO GYM!\p"
-	.string "You must be a TRAINER.\n"
-	.string "You should try using this item.$"
+	.string "You must have the CUT HM!\p"
+	.string "I've been looking for a TRAINER.\n"
+	.string "Would you look after this POKéMON?$"
 
-PetalburgWoods_Text_MiracleSeedExplanation:
-	.string "It's a MIRACLE SEED.\n"
-	.string "If a POKéMON holds that item, its\l"
-	.string "GRASS-type moves become stronger.\p"
-	.string "Besides MIRACLE SEED, I think there are\n"
-	.string "other convenient items for POKéMON\l"
-	.string "to hold.$"
+PetalburgWoods_Text_ChikoritaExplanation:
+	.string "It's a CHIKORITA.\n"
+	.string "This POKéMON loves sunshine, so\l"
+	.string "make sure it's out following you often.\p"
+	.string "CHIKORITA aren't typically found in the\n"
+	.string "HOENN region, but lately, mass migrations\l"
+	.string "have been noted. Maybe the weather?$"
 
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "TRAINER TIPS\p"
@@ -471,3 +477,13 @@ PetalburgWoods_Text_TrainerTipsPP:
 	.string "If a POKéMON runs out of PP, it must be\n"
 	.string "taken to a POKéMON CENTER.$"
 
+Text_PlayerReceivedChikorita:
+	.string "{PLAYER} received a {STR_VAR_2}!$"
+
+PetalburgWoods_Script_PlayerHasFullParty::
+	msgbox PetalburgWoods_Text_PlayerHasFullParty, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgWoods_Text_PlayerHasFullParty:
+	.string "Ah, your party is full.$"
