@@ -4166,6 +4166,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                             break;
                         }
 
+                        // If Nuzlocke mode is active, prevent revives from working on perma-dead Pokemon
+                        if (FlagGet(FLAG_NUZLOCKE_MODE) && (effectFlags & (ITEM4_REVIVE >> 2)) && currentHP == 0)
+                        {
+                            itemEffectParam++;
+                            break;
+                        }
+
                         // Get amount of HP to restore
                         dataUnsigned = itemEffect[itemEffectParam++];
                         switch (dataUnsigned)
@@ -7215,6 +7222,14 @@ void HealPokemon(struct Pokemon *mon)
 {
     u32 data;
 
+    // If Nuzlocke mode is active and this Pokemon is "dead" (has 0 HP), don't heal it
+    if (FlagGet(FLAG_NUZLOCKE_MODE))
+    {
+        u16 currentHP = GetMonData(mon, MON_DATA_HP);
+        if (currentHP == 0)
+            return; // Don't heal perma-dead Pokemon
+    }
+
     data = GetMonData(mon, MON_DATA_MAX_HP);
     SetMonData(mon, MON_DATA_HP, &data);
 
@@ -7227,6 +7242,15 @@ void HealPokemon(struct Pokemon *mon)
 void HealBoxPokemon(struct BoxPokemon *boxMon)
 {
     u32 data;
+
+    // If Nuzlocke mode is active and this Pokemon is "dead" (has max HP lost), don't heal it
+    if (FlagGet(FLAG_NUZLOCKE_MODE))
+    {
+        u16 hpLost = GetBoxMonData(boxMon, MON_DATA_HP_LOST);
+        u16 maxHP = GetBoxMonData(boxMon, MON_DATA_MAX_HP);
+        if (hpLost == maxHP)
+            return; // Don't heal perma-dead Pokemon
+    }
 
     data = 0;
     SetBoxMonData(boxMon, MON_DATA_HP_LOST, &data);
