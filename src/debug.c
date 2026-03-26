@@ -92,6 +92,9 @@ enum FlagsVarsDebugMenu
     DEBUG_FLAGVAR_MENU_ITEM_VARS,
     DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL,
     DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET,
+    DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_MONS,
+    DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_MOVES,
+    DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_ABILITIES,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV,
@@ -321,6 +324,9 @@ static void DebugAction_FlagsVars_TrainerSeeOnOff(u8 taskId);
 static void DebugAction_FlagsVars_BagUseOnOff(u8 taskId);
 static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId);
 static void DebugAction_FlagsVars_RunningShoes(u8 taskId);
+static void DebugAction_FlagsVars_RandomizerMonsOnOff(u8 taskId);
+static void DebugAction_FlagsVars_RandomizerMovesOnOff(u8 taskId);
+static void DebugAction_FlagsVars_RandomizerAbilitiesOnOff(u8 taskId);
 
 static void DebugAction_Give_Item(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
@@ -695,6 +701,9 @@ static const struct DebugMenuOption sDebugMenu_Actions_Flags[] =
     [DEBUG_FLAGVAR_MENU_ITEM_VARS]                 = { COMPOUND_STRING("Set Var XYZ…"),                      DebugAction_FlagsVars_Vars },
     [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL]         = { COMPOUND_STRING("Pokédex Flags All"),                 DebugAction_FlagsVars_PokedexFlags_All },
     [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET]       = { COMPOUND_STRING("Pokédex Flags Reset"),               DebugAction_FlagsVars_PokedexFlags_Reset },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_MONS]     = { COMPOUND_STRING("Toggle {STR_VAR_1}Random Mons"),     DebugAction_ToggleFlag, DebugAction_FlagsVars_RandomizerMonsOnOff },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_MOVES]    = { COMPOUND_STRING("Toggle {STR_VAR_1}Random Moves"),    DebugAction_ToggleFlag, DebugAction_FlagsVars_RandomizerMovesOnOff },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_ABILITIES] = { COMPOUND_STRING("Toggle {STR_VAR_1}Random Ability"), DebugAction_ToggleFlag, DebugAction_FlagsVars_RandomizerAbilitiesOnOff },
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),         DebugAction_ToggleFlag, DebugAction_FlagsVars_SwitchDex },
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = { COMPOUND_STRING("Toggle {STR_VAR_1}National Dex"),    DebugAction_ToggleFlag, DebugAction_FlagsVars_SwitchNatDex },
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV]       = { COMPOUND_STRING("Toggle {STR_VAR_1}PokéNav"),         DebugAction_ToggleFlag, DebugAction_FlagsVars_SwitchPokeNav },
@@ -1232,6 +1241,15 @@ static u8 Debug_CheckToggleFlags(u8 id)
     #endif
     case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE:
         result = VarGet(B_VAR_NO_BAG_USE);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_MONS:
+        result = FlagGet(FLAG_RANDOMIZER_MONS);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_MOVES:
+        result = FlagGet(FLAG_RANDOMIZER_MOVES);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RANDOMIZER_ABILITIES:
+        result = FlagGet(FLAG_RANDOMIZER_ABILITIES);
         break;
     default:
         result = 0xFF;
@@ -2629,6 +2647,33 @@ static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId)
         PlaySE(SE_PC_LOGIN);
     FlagToggle(B_FLAG_NO_CATCHING);
 #endif
+}
+
+static void DebugAction_FlagsVars_RandomizerMonsOnOff(u8 taskId)
+{
+    if (FlagGet(FLAG_RANDOMIZER_MONS))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(SE_PC_LOGIN);
+    FlagToggle(FLAG_RANDOMIZER_MONS);
+}
+
+static void DebugAction_FlagsVars_RandomizerMovesOnOff(u8 taskId)
+{
+    if (FlagGet(FLAG_RANDOMIZER_MOVES))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(SE_PC_LOGIN);
+    FlagToggle(FLAG_RANDOMIZER_MOVES);
+}
+
+static void DebugAction_FlagsVars_RandomizerAbilitiesOnOff(u8 taskId)
+{
+    if (FlagGet(FLAG_RANDOMIZER_ABILITIES))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(SE_PC_LOGIN);
+    FlagToggle(FLAG_RANDOMIZER_ABILITIES);
 }
 
 // *******************************

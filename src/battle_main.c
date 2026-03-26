@@ -45,6 +45,7 @@
 #include "pokemon.h"
 #include "pokerus.h"
 #include "random.h"
+#include "randomizer.h"
 #include "recorded_battle.h"
 #include "roamer.h"
 #include "safari_zone.h"
@@ -1904,6 +1905,9 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     bool32 noMoveSet = TRUE;
     u32 j;
 
+     if (FlagGet(FLAG_RANDOMIZER_MOVES))
+        return;
+
     for (j = 0; j < MAX_MON_MOVES; ++j)
     {
         if (partyEntry->moves[j] != MOVE_NONE)
@@ -1997,7 +2001,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             if (partyData[monIndex].ability != ABILITY_NONE)
             {
                 const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[partyData[monIndex].species];
-                u32 maxAbilityNum = ARRAY_COUNT(speciesInfo->abilities);
+                u32 maxAbilityNum = ARRAY_COUNT(speciesInfo->abilities);           
                 for (abilityNum = 0; abilityNum < maxAbilityNum; ++abilityNum)
                 {
                     if (speciesInfo->abilities[abilityNum] == partyData[monIndex].ability)

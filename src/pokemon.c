@@ -1,4 +1,6 @@
 #include "global.h"
+#include "gba/defines.h"
+#include "constants/pokemon.h"
 #include "malloc.h"
 #include "apprentice.h"
 #include "battle.h"
@@ -36,6 +38,7 @@
 #include "pokedex.h"
 #include "pokeblock.h"
 #include "pokemon.h"
+#include "randomizer.h"
 #include "pokemon_animation.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
@@ -1300,11 +1303,31 @@ void CreateRandomMonWithIVs(struct Pokemon *mon, u16 species, u8 level, u8 fixed
     GiveMonInitialMoveset(mon);
 }
 
+// Add randomizer support: if FLAG_RANDOMIZER is set, randomize species
+#include "constants/flags_frlg.h"
+#include "constants/species.h"
+#include "event_data.h"
+
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u32 personality, struct OriginalTrainerId trainerId)
 {
     u32 mail;
+    // Randomizer: if flag is set, randomize species, moves, and ability
+    if (FlagGet(FLAG_RANDOMIZER_MONS))
+    {
+        // You can adjust the range for how similar the BST should be (e.g., 50 = +/- 50 BST)
+        species = GetRandomSpeciesWithSimilarBST(species, 50);
+    }
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, personality, trainerId);
+
+    if (FlagGet(FLAG_RANDOMIZER_MOVES))
+    {
+        RandomizeMonMoves(mon);
+    }
+    if (FlagGet(FLAG_RANDOMIZER_ABILITIES))
+    {
+        RandomizeMonAbility(mon);
+    }
     SetMonData(mon, MON_DATA_LEVEL, &level);
     mail = MAIL_NONE;
     SetMonData(mon, MON_DATA_MAIL, &mail);
@@ -1750,6 +1773,7 @@ void CreateEnemyEventMon(void)
 
     CreateEventMon(&gEnemyParty[0], species, level, Random32(), OTID_STRUCT_PLAYER_ID);
     SetBoxMonIVs(&gEnemyParty[0].box, USE_RANDOM_IVS);
+    CalculateMonStats(&gEnemyParty[0]);
     GiveMonInitialMoveset(&gEnemyParty[0]);
     if (itemId)
     {
@@ -3749,6 +3773,9 @@ u32 GetSpeciesBaseStat(u16 species, u32 statIndex)
 
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
 {
+    if (FlagGet(FLAG_RANDOMIZER_MOVES)) {
+        return GetRandomizedLearnset(species);
+    }
     const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
     if (learnset == NULL)
         return gSpeciesInfo[SPECIES_NONE].levelUpLearnset;
