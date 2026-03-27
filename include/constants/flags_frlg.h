@@ -8,7 +8,7 @@
 #define FLAG_RANDOMIZER_MOVES           0x023
 #define FLAG_RANDOMIZER_ABILITIES       0x024
 #define FLAG_NUZLOCKE_MODE               0x025
-#define FLAG_NO_CATCHING                 0x026
+#define FLAG_NO_CATCHING              0x026
 #define FLAG_0x027               0x027
 
 // Hide/show flags

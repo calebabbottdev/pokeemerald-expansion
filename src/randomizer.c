@@ -20,21 +20,48 @@ static u16 GetSpeciesBST(u16 species) {
 }
 
 // Returns a random valid species with BST within a bracket of the original species
-u16 GetRandomSpeciesWithSimilarBST(u16 originalSpecies, u16 range) {
+u16 GetRandomSpeciesWithSimilarBST(u16 originalSpecies, u16 range)
+{
     u16 originalBST = GetSpeciesBST(originalSpecies);
-    u16 candidates[NUM_SPECIES];
+
+    u16 min = (originalBST > range) ? (originalBST - range) : 0;
+    u16 max = originalBST + range;
+
     u16 count = 0;
-    for (u16 i = 1; i < NUM_SPECIES - 1; i++) {
+
+    // First pass: count valid candidates
+    for (u16 i = 1; i < NUM_SPECIES - 1; i++)
+    {
         if (gSpeciesInfo[i].speciesName[0] == 0)
             continue;
+
         u16 bst = GetSpeciesBST(i);
-        if (bst >= originalBST - range && bst <= originalBST + range) {
-            candidates[count++] = i;
-        }
+        if (bst >= min && bst <= max)
+            count++;
     }
+
     if (count == 0)
         return originalSpecies;
-    return candidates[Random() % count];
+
+    u16 target = Random() % count;
+
+    // Second pass: pick the target-th candidate
+    count = 0;
+    for (u16 i = 1; i < NUM_SPECIES - 1; i++)
+    {
+        if (gSpeciesInfo[i].speciesName[0] == 0)
+            continue;
+
+        u16 bst = GetSpeciesBST(i);
+        if (bst >= min && bst <= max)
+        {
+            if (count == target)
+                return i;
+            count++;
+        }
+    }
+
+    return originalSpecies; // fallback (should never hit)
 }
 
 // ============== MOVE RANDOMIZATION ==============

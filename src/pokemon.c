@@ -1311,7 +1311,7 @@ void CreateRandomMonWithIVs(struct Pokemon *mon, u16 species, u8 level, u8 fixed
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u32 personality, struct OriginalTrainerId trainerId)
 {
     u32 mail;
-    // Randomizer: if flag is set, randomize species, moves, and ability
+    // Randomizer: if flag is set, randomize species
     if (FlagGet(FLAG_RANDOMIZER_MONS))
     {
         // You can adjust the range for how similar the BST should be (e.g., 50 = +/- 50 BST)

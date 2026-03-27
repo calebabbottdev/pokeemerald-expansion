@@ -55,6 +55,7 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 #include "fishing.h"
+#include "nuzlocke.h"
 
 enum TransitionType
 {
@@ -655,6 +656,8 @@ static void CB2_EndWildBattle(void)
             HealPlayerParty();
     }
 
+    MarkMapAsEncountered(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
         SetMainCallback2(CB2_WhiteOut);
@@ -671,6 +674,8 @@ static void CB2_EndScriptedWildBattle(void)
 {
     CpuFill16(0, (void *)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
+
+    MarkMapAsEncountered(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {

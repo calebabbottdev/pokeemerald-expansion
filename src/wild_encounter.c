@@ -23,6 +23,7 @@
 #include "battle_debug.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "nuzlocke.h"
 #include "constants/abilities.h"
 #include "constants/game_stat.h"
 #include "constants/item.h"
@@ -655,6 +656,16 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
 
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
+
+    // Check Nuzlocke mode - block catching on already-visited maps
+    if (HasMapBeenEncountered(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+    {
+        FlagSet(FLAG_NO_CATCHING);
+    }
+    else
+    {
+        FlagClear(FLAG_NO_CATCHING);
+    }
 
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == HEADER_NONE)
