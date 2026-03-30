@@ -3,7 +3,6 @@
   "name": "FuchsiaCity_Frlg",
   "layout": "LAYOUT_FUCHSIA_CITY",
   "music": "MUS_RG_FUCHSIA",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_FUCHSIA_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -48,7 +47,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_SLOWPOKE",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SLOWPOKE)",
       "x": 36,
       "y": 15,
       "elevation": 3,
@@ -62,7 +61,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_VOLTORB",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(VOLTORB)",
       "x": 33,
       "y": 8,
       "elevation": 3,
@@ -90,7 +89,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
       "x": 39,
       "y": 8,
       "elevation": 3,
@@ -118,7 +117,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LAPRAS",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LAPRAS)",
       "x": 12,
       "y": 20,
       "elevation": 1,
@@ -160,7 +159,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_KANGASKHAN",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KANGASKHAN)",
       "x": 16,
       "y": 9,
       "elevation": 3,
@@ -436,5 +435,6 @@
       "quantity": 1,
       "underfoot": false
     }
-  ]
+  ],
+  "region": "REGION_KANTO"
 }

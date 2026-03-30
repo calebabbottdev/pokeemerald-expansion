@@ -55,14 +55,14 @@ VermilionCity_EventScript_FerrySailor::
 	end
 
 VermilionCity_EventScript_CheckHasMysticTicket::
-	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
+	@ goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
 	checkitem ITEM_MYSTIC_TICKET
 	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
 	goto EventScript_SetResultTrue
 	end
 
 VermilionCity_EventScript_CheckHasAuroraTicket::
-	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
+	@ goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
 	checkitem ITEM_AURORA_TICKET
 	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
 	goto EventScript_SetResultTrue

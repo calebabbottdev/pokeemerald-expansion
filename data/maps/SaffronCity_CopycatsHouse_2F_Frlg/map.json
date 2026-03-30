@@ -3,7 +3,6 @@
   "name": "SaffronCity_CopycatsHouse_2F_Frlg",
   "layout": "LAYOUT_SAFFRON_CITY_COPYCATS_HOUSE_2F",
   "music": "MUS_RG_PEWTER",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -18,7 +17,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_DODUO",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(DODUO)",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -32,7 +31,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_PIKACHU_FRLG",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PIKACHU)",
       "x": 4,
       "y": 6,
       "elevation": 3,
@@ -46,7 +45,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_JIGGLYPUFF",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(JIGGLYPUFF)",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -110,5 +109,6 @@
       "quantity": 1,
       "underfoot": false
     }
-  ]
+  ],
+  "region": "REGION_KANTO"
 }

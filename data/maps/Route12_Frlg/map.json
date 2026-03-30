@@ -3,7 +3,6 @@
   "name": "Route12_Frlg",
   "layout": "LAYOUT_ROUTE12",
   "music": "MUS_RG_ROUTE11",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_ROUTE_12",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -90,7 +89,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_SNORLAX",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SNORLAX)",
       "x": 14,
       "y": 70,
       "elevation": 3,
@@ -307,5 +306,6 @@
       "quantity": 1,
       "underfoot": false
     }
-  ]
+  ],
+  "region": "REGION_KANTO"
 }

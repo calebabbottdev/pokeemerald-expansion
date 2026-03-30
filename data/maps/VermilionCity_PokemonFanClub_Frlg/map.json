@@ -3,7 +3,6 @@
   "name": "VermilionCity_PokemonFanClub_Frlg",
   "layout": "LAYOUT_VERMILION_CITY_POKEMON_FAN_CLUB",
   "music": "MUS_RG_VERMILLION",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_VERMILION_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -46,7 +45,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_PIKACHU_FRLG",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PIKACHU)",
       "x": 7,
       "y": 6,
       "elevation": 3,
@@ -60,7 +59,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_SEEL",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SEEL)",
       "x": 4,
       "y": 6,
       "elevation": 3,
@@ -144,5 +143,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "VermilionCity_PokemonFanClub_EventScript_RulesSign2"
     }
-  ]
+  ],
+  "region": "REGION_KANTO"
 }

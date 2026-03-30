@@ -3,7 +3,6 @@
   "name": "ThreeIsland_Frlg",
   "layout": "LAYOUT_THREE_ISLAND",
   "music": "MUS_RG_SEVII_123",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_THREE_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -205,7 +204,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_DODUO",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(DODUO)",
       "x": 15,
       "y": 14,
       "elevation": 3,
@@ -395,5 +394,6 @@
       "quantity": 1,
       "underfoot": false
     }
-  ]
+  ],
+  "region": "REGION_KANTO"
 }

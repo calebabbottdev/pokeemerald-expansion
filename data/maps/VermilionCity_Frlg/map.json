@@ -3,7 +3,6 @@
   "name": "VermilionCity_Frlg",
   "layout": "LAYOUT_VERMILION_CITY",
   "music": "MUS_RG_VERMILLION",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_VERMILION_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -71,7 +70,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_MACHOP",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MACHOP)",
       "x": 35,
       "y": 11,
       "elevation": 3,
@@ -299,8 +298,9 @@
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
       "flag": "FLAG_HIDDEN_ITEM_VERMILION_CITY_MAX_ETHER",
-      "quantity": 1,
+      "quantity": 3,
       "underfoot": false
     }
-  ]
+  ],
+  "region": "REGION_KANTO"
 }
