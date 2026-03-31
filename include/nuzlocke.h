@@ -33,4 +33,8 @@ void ResetNuzlockeEncounters(void);
 // Get the current Nuzlocke data
 NuzlockeData *GetNuzlockeData(void);
 
+// Returns TRUE if the encountered species (or any member of its evolution line) is already caught.
+// Used to implement the Species Clause: allow catching even on a previously-visited map.
+bool8 IsEncounteredSpeciesInOwnedEvolutionLine(u16 species);
+
 #endif // GUARD_NUZLOCKE_H

@@ -95,6 +95,7 @@ EWRAM_DATA u16 gPartnerTrainerId = 0;
 EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
+EWRAM_DATA static bool8 sIsSpeciesClauseEncounter = FALSE;
 
 // The first transition is used if the enemy Pokémon are lower level than our Pokémon.
 // Otherwise, the second transition is used.
@@ -334,8 +335,23 @@ void BattleSetup_StartWildBattle(void)
         DoSafariBattle();
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();
-    else
+    // Check Nuzlocke mode - a map that's already been used always blocks catching.
+    // The Species Clause only prevents the map from being marked in the first place (see CB2_EndWildBattle).
+    else if (IsNuzlockeModeEnabled() && HasMapBeenEncountered(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+    {
+        FlagSet(FLAG_NO_CATCHING);
+        sIsSpeciesClauseEncounter = FALSE;
         DoStandardWildBattle(FALSE);
+    }
+    else
+    {
+        FlagClear(FLAG_NO_CATCHING);
+        // Species Clause: if the encountered species (or any member of its evo line) is already owned,
+        // this encounter is "free" - the map will not be marked as used afterward.
+        sIsSpeciesClauseEncounter = IsNuzlockeModeEnabled()
+            && IsEncounteredSpeciesInOwnedEvolutionLine(GetMonData(&gEnemyParty[0], MON_DATA_SPECIES));
+        DoStandardWildBattle(FALSE);
+    }
 }
 
 void BattleSetup_StartDoubleWildBattle(void)
@@ -656,7 +672,10 @@ static void CB2_EndWildBattle(void)
             HealPlayerParty();
     }
 
-    MarkMapAsEncountered(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    // Species Clause: skip marking the map if this was a free encounter (owned species).
+    if (!sIsSpeciesClauseEncounter)
+        MarkMapAsEncountered(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    sIsSpeciesClauseEncounter = FALSE;
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
