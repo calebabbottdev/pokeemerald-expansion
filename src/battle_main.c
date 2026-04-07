@@ -43,6 +43,7 @@
 #include "pokeball.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "dynamic_mon_levels.h"
 #include "pokerus.h"
 #include "random.h"
 #include "randomizer.h"
@@ -1955,6 +1956,23 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         u32 monIndices[monsCount];
         DoTrainerPartyPool(trainer, monIndices, monsCount, battleTypeFlags);
 
+        u8 dynamicTarget = 0;
+        u8 trainerAvgLevel = 0;
+        if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
+        {
+            u32 lvlSum = 0;
+            u8 trainerPartySize = trainer->partySize;
+            u32 j;
+            if (trainerPartySize == 0)
+                trainerPartySize = 1;
+            for (j = 0; j < trainer->partySize; j++)
+                lvlSum += trainer->party[j].lvl;
+            trainerAvgLevel = (u8)(lvlSum / trainerPartySize);
+            if (trainerAvgLevel == 0)
+                trainerAvgLevel = 1;
+            dynamicTarget = GetDynamicTargetLevel();
+        }
+
         for (i = 0; i < monsCount; i++)
         {
             u32 monIndex = monIndices[i];
@@ -1963,6 +1981,8 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             const struct TrainerMon *partyData = trainer->party;
             struct OriginalTrainerId otId = OTID_STRUCT_RANDOM_NO_SHINY;
             u32 abilityNum = 0;
+            u8 monLevel;
+            u16 monSpecies;
 
             if (trainer->battleType != TRAINER_BATTLE_TYPE_SINGLES)
                 personalityValue = 0x80;
@@ -1984,7 +2004,14 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 otId.method = OT_ID_PRESET;
                 otId.value = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
-            CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, personalityValue, otId);
+            monLevel = partyData[monIndex].lvl;
+            monSpecies = partyData[monIndex].species;
+            if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
+            {
+                monLevel = ScaleTrainerMonLevel(partyData[monIndex].lvl, trainerAvgLevel, dynamicTarget, (i == monsCount - 1 && monsCount > 1));
+                monSpecies = GetLevelEvolvedSpecies(monSpecies, monLevel);
+            }
+            CreateMon(&party[i], monSpecies, monLevel, personalityValue, otId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
@@ -2000,7 +2027,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             }
             if (partyData[monIndex].ability != ABILITY_NONE)
             {
-                const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[partyData[monIndex].species];
+                const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[monSpecies];
                 u32 maxAbilityNum = ARRAY_COUNT(speciesInfo->abilities);           
                 for (abilityNum = 0; abilityNum < maxAbilityNum; ++abilityNum)
                 {
@@ -2011,7 +2038,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             }
             else if (B_TRAINER_MON_RANDOM_ABILITY)
             {
-                const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[partyData[monIndex].species];
+                const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[monSpecies];
                 abilityNum = personalityHash % 3;
                 while (speciesInfo->abilities[abilityNum] == ABILITY_NONE)
                 {

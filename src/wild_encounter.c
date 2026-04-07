@@ -3,6 +3,7 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "event_data.h"
+#include "dynamic_mon_levels.h"
 #include "fieldmap.h"
 #include "fishing.h"
 #include "follower_npc.h"
@@ -538,7 +539,27 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum 
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
-    CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+    if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
+    {
+        u16 monSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
+        s16 dynLevel = (s16)GetDynamicTargetLevel() + (s16)(Random() % 7) - 3;
+        u8 tableMin = wildMonInfo->wildPokemon[wildMonIndex].minLevel < wildMonInfo->wildPokemon[wildMonIndex].maxLevel
+                      ? wildMonInfo->wildPokemon[wildMonIndex].minLevel
+                      : wildMonInfo->wildPokemon[wildMonIndex].maxLevel;
+        if (dynLevel < tableMin)
+            dynLevel = tableMin;
+        if (dynLevel < 1)
+            dynLevel = 1;
+        if (dynLevel > 100)
+            dynLevel = 100;
+        level = (u8)dynLevel;
+        monSpecies = GetLevelEvolvedSpecies(monSpecies, level);
+        CreateWildMon(monSpecies, level);
+    }
+    else
+    {
+        CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+    }
     return TRUE;
 }
 
@@ -549,6 +570,21 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
     UpdateChainFishingStreak();
+    if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
+    {
+        s16 dynLevel = (s16)GetDynamicTargetLevel() + (s16)(Random() % 7) - 3;
+        u8 tableMin = wildMonInfo->wildPokemon[wildMonIndex].minLevel < wildMonInfo->wildPokemon[wildMonIndex].maxLevel
+                      ? wildMonInfo->wildPokemon[wildMonIndex].minLevel
+                      : wildMonInfo->wildPokemon[wildMonIndex].maxLevel;
+        if (dynLevel < tableMin)
+            dynLevel = tableMin;
+        if (dynLevel < 1)
+            dynLevel = 1;
+        if (dynLevel > 100)
+            dynLevel = 100;
+        level = (u8)dynLevel;
+        wildMonSpecies = GetLevelEvolvedSpecies(wildMonSpecies, level);
+    }
     CreateWildMon(wildMonSpecies, level);
     return wildMonSpecies;
 }
