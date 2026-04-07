@@ -659,6 +659,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese
 	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
 	msgbox PalletTown_ProfessorOaksLab_Text_OakExplainCatching
+	call PalletTown_ProfessorOaksLab_EventScript_AskGameModeOptions
 	famechecker FAMECHECKER_OAK, 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps
@@ -1485,6 +1486,35 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
 
 PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls::
 	.string "{PLAYER} received five POKé BALLS.$"
+
+PalletTown_ProfessorOaksLab_EventScript_AskGameModeOptions::
+	msgbox PalletTown_ProfessorOaksLab_Text_AskDynamicLevels, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PalletTown_ProfessorOaksLab_EventScript_SetDynamicLevels
+	clearflag FLAG_DYNAMIC_MON_LEVELS
+	goto PalletTown_ProfessorOaksLab_EventScript_AskNuzlockeMode
+PalletTown_ProfessorOaksLab_EventScript_SetDynamicLevels::
+	setflag FLAG_DYNAMIC_MON_LEVELS
+PalletTown_ProfessorOaksLab_EventScript_AskNuzlockeMode::
+	msgbox PalletTown_ProfessorOaksLab_Text_AskNuzlockeMode, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PalletTown_ProfessorOaksLab_EventScript_SetNuzlockeMode
+	clearflag FLAG_NUZLOCKE_MODE
+	return
+PalletTown_ProfessorOaksLab_EventScript_SetNuzlockeMode::
+	setflag FLAG_NUZLOCKE_MODE
+	return
+
+PalletTown_ProfessorOaksLab_Text_AskDynamicLevels::
+	.string "One more thing, {PLAYER}.\p"
+	.string "Should wild POKéMON and trainers\n"
+	.string "scale to your team's level?$"
+
+PalletTown_ProfessorOaksLab_Text_AskNuzlockeMode::
+	.string "Would you like to play in\n"
+	.string "NUZLOCKE mode?\p"
+	.string "In NUZLOCKE mode, you may only\n"
+	.string "catch one POKéMON per area.\p"
+	.string "If a POKéMON faints, it can\n"
+	.string "no longer be used.$"
 
 PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
 	.string "When a wild POKéMON appears,\n"
