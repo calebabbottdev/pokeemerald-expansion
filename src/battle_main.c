@@ -2008,7 +2008,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             monSpecies = partyData[monIndex].species;
             if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
             {
-                monLevel = ScaleTrainerMonLevel(partyData[monIndex].lvl, trainerAvgLevel, dynamicTarget, (i == monsCount - 1 && monsCount > 1));
+                monLevel = ScaleTrainerMonLevel(partyData[monIndex].lvl, trainerAvgLevel, dynamicTarget, (i == monsCount - 1 && monsCount > 1), trainer->trainerClass);
                 monSpecies = GetLevelEvolvedSpecies(monSpecies, monLevel);
             }
             CreateMon(&party[i], monSpecies, monLevel, personalityValue, otId);

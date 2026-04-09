@@ -13,11 +13,13 @@ u8  GetDynamicTargetLevel(void);
 u16 GetLevelEvolvedSpecies(u16 species, u8 level);
 
 // Scales a single trainer mon's level relative to:
-//   baseLevel   - the mon's hardcoded level from trainer party data
-//   trainerAvg  - mean level across the full trainer party
-//   targetLevel - result of GetDynamicTargetLevel()
-//   isAce       - TRUE for the last mon in the party (trainer's ace)
+//   baseLevel    - the mon's hardcoded level from trainer party data
+//   trainerAvg   - mean level across the full trainer party
+//   targetLevel  - result of GetDynamicTargetLevel()
+//   isAce        - TRUE for the last mon in the party (trainer's ace)
+//   trainerClass - TrainerClassID used to look up the per-class scale %
+//                  (see sTrainerClassScalePct in dynamic_mon_levels.c)
 // Returns the scaled level clamped to [1, 100].
-u8  ScaleTrainerMonLevel(u8 baseLevel, u8 trainerAvg, u8 targetLevel, bool8 isAce);
+u8  ScaleTrainerMonLevel(u8 baseLevel, u8 trainerAvg, u8 targetLevel, bool8 isAce, u16 trainerClass);
 
 #endif // GUARD_DYNAMIC_MON_LEVELS_H
