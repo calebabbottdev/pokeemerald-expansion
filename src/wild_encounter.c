@@ -542,7 +542,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum 
     if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
     {
         u16 monSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
-        s16 dynLevel = (s16)GetDynamicTargetLevel() + (s16)(Random() % 7) - 3;
+        s16 dynLevel = (s16)(((u32)GetDynamicTargetLevel() * DYNAMIC_LEVEL_WILD_PCT + 50) / 100) + (s16)(Random() % 7) - 3;
         u8 tableMin = wildMonInfo->wildPokemon[wildMonIndex].minLevel < wildMonInfo->wildPokemon[wildMonIndex].maxLevel
                       ? wildMonInfo->wildPokemon[wildMonIndex].minLevel
                       : wildMonInfo->wildPokemon[wildMonIndex].maxLevel;
@@ -572,7 +572,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     UpdateChainFishingStreak();
     if (FlagGet(FLAG_DYNAMIC_MON_LEVELS))
     {
-        s16 dynLevel = (s16)GetDynamicTargetLevel() + (s16)(Random() % 7) - 3;
+        s16 dynLevel = (s16)(((u32)GetDynamicTargetLevel() * DYNAMIC_LEVEL_WILD_PCT + 50) / 100) + (s16)(Random() % 7) - 3;
         u8 tableMin = wildMonInfo->wildPokemon[wildMonIndex].minLevel < wildMonInfo->wildPokemon[wildMonIndex].maxLevel
                       ? wildMonInfo->wildPokemon[wildMonIndex].minLevel
                       : wildMonInfo->wildPokemon[wildMonIndex].maxLevel;

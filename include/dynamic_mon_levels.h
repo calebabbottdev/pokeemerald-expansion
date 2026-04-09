@@ -1,6 +1,11 @@
 #ifndef GUARD_DYNAMIC_MON_LEVELS_H
 #define GUARD_DYNAMIC_MON_LEVELS_H
 
+// Percentage of the dynamic target level used for wild encounter scaling.
+// 100 = wild mons appear at the full player-equivalent level.
+// 75  = wild mons appear at 75% of that level (easier, more realistic).
+#define DYNAMIC_LEVEL_WILD_PCT 75
+
 // Returns the dynamic target level for enemy Pokémon, based on the
 // player's party level (weighted toward the highest-level party member)
 // and a badge-count-based minimum floor.
