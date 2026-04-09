@@ -17,9 +17,60 @@ SilphCo_11F_EventScript_President::
 	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_NoRoomForMasterBall
 	giveitem_msg SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_RG_OBTAIN_KEY_ITEM
 	msgbox SilphCo_11F_Text_ThatsOurSecretPrototype
+	goto_if_set FLAG_GOT_MEGA_RING_FROM_SILPH, SilphCo_11F_EventScript_SkipMegaRing
+	checkitemspace ITEM_MEGA_RING
+	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_NoRoomForMegaRing
+	msgbox SilphCo_11F_Text_PresidentAlsoHasMegaRing
+	giveitem_msg SilphCo_11F_Text_ObtainedMegaRingFromPresident, ITEM_MEGA_RING, 1, MUS_RG_OBTAIN_KEY_ITEM
+	msgbox SilphCo_11F_Text_MegaRingExplain
+	setflag FLAG_GOT_MEGA_RING_FROM_SILPH
+	goto_if_set FLAG_GOT_STARTER_MEGA_STONE_FROM_SILPH, SilphCo_11F_EventScript_SkipStarterMegaStone
+	call_if_eq VAR_STARTER_MON, 0, SilphCo_11F_EventScript_GiveVenusaurite
+	call_if_eq VAR_STARTER_MON, 1, SilphCo_11F_EventScript_GiveBlastoisinite
+	call_if_eq VAR_STARTER_MON, 2, SilphCo_11F_EventScript_GiveCharizarditeXY
+SilphCo_11F_EventScript_SkipStarterMegaStone::
+SilphCo_11F_EventScript_SkipMegaRing::
 	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
 	release
 	end
+
+SilphCo_11F_EventScript_NoRoomForMegaRing::
+	msgbox SilphCo_11F_Text_YouHaveNoRoomForMegaRing
+	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
+	release
+	end
+
+SilphCo_11F_EventScript_GiveVenusaurite::
+	msgbox SilphCo_11F_Text_StarterMegaStoneIntro
+	checkitemspace ITEM_VENUSAURITE
+	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_NoRoomForStarterStone
+	giveitem_msg SilphCo_11F_Text_ObtainedVenusaurite, ITEM_VENUSAURITE, 1, MUS_RG_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_STARTER_MEGA_STONE_FROM_SILPH
+	return
+
+SilphCo_11F_EventScript_GiveBlastoisinite::
+	msgbox SilphCo_11F_Text_StarterMegaStoneIntro
+	checkitemspace ITEM_BLASTOISINITE
+	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_NoRoomForStarterStone
+	giveitem_msg SilphCo_11F_Text_ObtainedBlastoisinite, ITEM_BLASTOISINITE, 1, MUS_RG_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_STARTER_MEGA_STONE_FROM_SILPH
+	return
+
+SilphCo_11F_EventScript_GiveCharizarditeXY::
+	msgbox SilphCo_11F_Text_CharizarditeIntro
+	checkitemspace ITEM_CHARIZARDITE_X
+	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_NoRoomForStarterStone
+	giveitem_msg SilphCo_11F_Text_ObtainedCharizarditeX, ITEM_CHARIZARDITE_X, 1, MUS_RG_OBTAIN_KEY_ITEM
+	checkitemspace ITEM_CHARIZARDITE_Y
+	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_ReturnFromCharizarditeY
+	giveitem_msg SilphCo_11F_Text_ObtainedCharizarditeY, ITEM_CHARIZARDITE_Y, 1, MUS_RG_OBTAIN_KEY_ITEM
+SilphCo_11F_EventScript_ReturnFromCharizarditeY::
+	setflag FLAG_GOT_STARTER_MEGA_STONE_FROM_SILPH
+	return
+
+SilphCo_11F_EventScript_NoRoomForStarterStone::
+	msgbox SilphCo_11F_Text_NoRoomForStarterStone
+	return
 
 SilphCo_11F_EventScript_PresidentThanksMale::
 	msgbox SilphCo_11F_Text_ThanksForSavingMeDearBoy
@@ -155,6 +206,63 @@ SilphCo_11F_Text_ThanksForSavingMeDearGirl::
 SilphCo_11F_Text_ObtainedMasterBallFromPresident::
 	.string "{PLAYER} obtained a MASTER BALL\n"
 	.string "from the PRESIDENT!$"
+
+SilphCo_11F_Text_PresidentAlsoHasMegaRing::
+	.string "PRESIDENT: Oh, and one more thing.\p"
+	.string "SILPH CO. has been secretly\n"
+	.string "researching a new phenomenon.\p"
+	.string "We call it MEGA EVOLUTION.\p"
+	.string "With this ring and a special stone,\n"
+	.string "your POKéMON can exceed its\p"
+	.string "limits in battle!\p"
+	.string "This prototype is yours.\n"
+	.string "Use it well.$"
+
+SilphCo_11F_Text_ObtainedMegaRingFromPresident::
+	.string "{PLAYER} obtained the MEGA RING\n"
+	.string "from the PRESIDENT!$"
+
+SilphCo_11F_Text_MegaRingExplain::
+	.string "PRESIDENT: During battle, press\n"
+	.string "START before choosing a move.\p"
+	.string "A POKéMON holding a MEGA STONE\n"
+	.string "will MEGA EVOLVE!$"
+
+SilphCo_11F_Text_YouHaveNoRoomForMegaRing::
+	.string "PRESIDENT: I also wanted to give\n"
+	.string "you a MEGA RING, but your bag\n"
+	.string "is full.$"
+
+SilphCo_11F_Text_StarterMegaStoneIntro::
+	.string "Here is a MEGA STONE made\n"
+	.string "for your starter POKéMON!$"
+
+SilphCo_11F_Text_CharizarditeIntro::
+	.string "CHARIZARD can MEGA EVOLVE\n"
+	.string "into two different forms.\p"
+	.string "A stone for each form.\n"
+	.string "Both are yours!$"
+
+SilphCo_11F_Text_ObtainedVenusaurite::
+	.string "{PLAYER} obtained the\n"
+	.string "VENUSAURITE!$"
+
+SilphCo_11F_Text_ObtainedBlastoisinite::
+	.string "{PLAYER} obtained the\n"
+	.string "BLASTOISINITE!$"
+
+SilphCo_11F_Text_ObtainedCharizarditeX::
+	.string "{PLAYER} obtained the\n"
+	.string "CHARIZARDITE X!$"
+
+SilphCo_11F_Text_ObtainedCharizarditeY::
+	.string "{PLAYER} obtained the\n"
+	.string "CHARIZARDITE Y!$"
+
+SilphCo_11F_Text_NoRoomForStarterStone::
+	.string "PRESIDENT: I also had a MEGA\n"
+	.string "STONE for your starter, but\n"
+	.string "your bag is full.$"
 
 SilphCo_11F_Text_ThatsOurSecretPrototype::
 	.string "PRESIDENT: You can't buy that\n"

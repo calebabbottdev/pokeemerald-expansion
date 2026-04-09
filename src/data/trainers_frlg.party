@@ -5010,15 +5010,15 @@ Nidorino
 Level: 37
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 
-Kangaskhan
-Level: 35
+Nidoqueen
+Level: 37
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 
 Rhyhorn
 Level: 37
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 
-Nidoqueen
+Kangaskhan @ Kangaskhanite
 Level: 41
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 
@@ -5071,6 +5071,14 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Rock Blast
 - Scary Face
 - Earthquake
+
+Kangaskhan @ Kangaskhanite
+Level: 52
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Fake Out
+- Body Slam
+- Earthquake
+- Crunch
 
 === TRAINER_TEAM_ROCKET_GRUNT ===
 Name: GRUNT
@@ -6857,14 +6865,6 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Hail
 - Dive
 
-Slowbro
-Level: 52
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
-- Ice Beam
-- Surf
-- Amnesia
-- Yawn
-
 Jynx
 Level: 54
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
@@ -6880,6 +6880,14 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Ice Beam
 - Surf
 - Body Slam
+
+Slowbro @ Slowbronite
+Level: 54
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Ice Beam
+- Surf
+- Amnesia
+- Yawn
 
 === TRAINER_ELITE_FOUR_BRUNO ===
 Name: BRUNO
@@ -6946,7 +6954,7 @@ Mugshot: Pink
 Gengar
 Level: 54
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
-- Shadow Punch
+- Hex
 - Confuse Ray
 - Toxic
 - Double Team
@@ -6956,8 +6964,8 @@ Level: 54
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Confuse Ray
 - Poison Fang
-- Air Cutter
-- Bite
+- Wing Attack
+- Crunch
 
 Haunter
 Level: 53
@@ -6965,17 +6973,17 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Hypnosis
 - Dream Eater
 - Curse
-- Mean Look
+- Shadow Ball
 
 Arbok
 Level: 56
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
-- Sludge Bomb
+- Poison Fang
 - Screech
 - Iron Tail
 - Bite
 
-Gengar @ Sitrus Berry
+Gengar @ Gengarite
 Level: 58
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Shadow Ball
@@ -7026,7 +7034,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Wing Attack
 - Scary Face
 
-Dragonite @ Sitrus Berry
+Dragonite @ Dragoninite
 Level: 60
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Hyper Beam
@@ -7234,6 +7242,14 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Take Down
 - Fire Blast
 
+Charizard @ Charizardite Y
+Level: 50
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Flamethrower
+- Air Slash
+- Solarbeam
+- Scorching Sands
+
 === TRAINER_LEADER_SABRINA ===
 Name: SABRINA
 Class: Leader Frlg
@@ -7268,7 +7284,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Leech Life
 - Supersonic
 
-Alakazam
+Alakazam @ Alakazite
 Level: 43
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Psychic
